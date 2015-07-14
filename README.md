@@ -143,6 +143,14 @@ imageView.image = UIImage.size(width: 100, height: 100)
 | `.image()` | Generate and return image |
 
 
+Playground
+----------
+
+Use CocoaPods command `$ pod try SwiftyImage` to try Playground!
+
+![playground](https://cloud.githubusercontent.com/assets/931655/8676209/06d13734-2a83-11e5-8921-ec22762743c4.png)
+
+
 License
 -------
 
