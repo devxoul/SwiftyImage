@@ -10,6 +10,7 @@
 		03B119441B54E2AB00427302 /* SwiftyImage.h in Headers */ = {isa = PBXBuildFile; fileRef = 03B119431B54E2AB00427302 /* SwiftyImage.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		03B1194A1B54E2AB00427302 /* SwiftyImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 03B1193E1B54E2AB00427302 /* SwiftyImage.framework */; };
 		03B119511B54E2AB00427302 /* SwiftyImageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B119501B54E2AB00427302 /* SwiftyImageTests.swift */; };
+		03B1195B1B54E35A00427302 /* SwiftyImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B1195A1B54E35A00427302 /* SwiftyImage.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -29,6 +30,8 @@
 		03B119491B54E2AB00427302 /* SwiftyImageTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftyImageTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		03B1194F1B54E2AB00427302 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		03B119501B54E2AB00427302 /* SwiftyImageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftyImageTests.swift; sourceTree = "<group>"; };
+		03B1195A1B54E35A00427302 /* SwiftyImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyImage.swift; sourceTree = "<group>"; };
+		03B1195C1B54E3D300427302 /* SwiftyImage.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = SwiftyImage.playground; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +75,8 @@
 			isa = PBXGroup;
 			children = (
 				03B119431B54E2AB00427302 /* SwiftyImage.h */,
+				03B1195A1B54E35A00427302 /* SwiftyImage.swift */,
+				03B1195C1B54E3D300427302 /* SwiftyImage.playground */,
 				03B119411B54E2AB00427302 /* Supporting Files */,
 			);
 			path = SwiftyImage;
@@ -209,6 +214,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				03B1195B1B54E35A00427302 /* SwiftyImage.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -323,6 +329,7 @@
 		03B119551B54E2AB00427302 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -332,12 +339,14 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
 		03B119561B54E2AB00427302 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -399,6 +408,7 @@
 				03B119561B54E2AB00427302 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		03B119571B54E2AB00427302 /* Build configuration list for PBXNativeTarget "SwiftyImageTests" */ = {
 			isa = XCConfigurationList;
@@ -407,6 +417,7 @@
 				03B119591B54E2AB00427302 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
