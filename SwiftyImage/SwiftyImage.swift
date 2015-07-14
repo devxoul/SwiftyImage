@@ -47,7 +47,7 @@ public class ImageDrawer {
     }
 
     private var color = UIColor.clearColor()
-    private var borderColor: UIColor?
+    private var borderColor = UIColor.blackColor()
     private var borderWidth: CGFloat = 0
     private var borderAlignment: BorderAlignment = .Inside
     private var cornerRadius: CGFloat = 0
@@ -64,7 +64,7 @@ public class ImageDrawer {
 
     // MARK: Border
 
-    public func border(#color: UIColor?) -> Self {
+    public func border(#color: UIColor) -> Self {
         self.borderColor = color
         return self
     }
@@ -143,7 +143,7 @@ public class ImageDrawer {
         let context = UIGraphicsGetCurrentContext()
 
         self.color.setFill()
-        self.borderColor?.setStroke()
+        self.borderColor.setStroke()
 
         let path: UIBezierPath
         if self.cornerRadius > 0 {
