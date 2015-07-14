@@ -9,9 +9,9 @@ The most sexy way to use images in Swift.
 Features
 --------
 
-* [x] Create images with method chaining
-* [x] Create and manipulate images with CGContext
-* [x] Combine images with `+` operator
+* [x] [Create images with method chaining](#getting-started)
+* [x] [Create and manipulate images with CGContext](#play-with-cgcontext)
+* [x] [Combine images with `+` operator](#image-operator)
 * [x] iOS support
 * [ ] OS X support
 
