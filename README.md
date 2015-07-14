@@ -53,7 +53,7 @@ Use [CocoaPods](https://cocoapods.org). Minimum required version of CocoaPods is
 **Podfile**
 
 ```ruby
-pod 'SwiftyImage', '0.1.0'
+pod 'SwiftyImage', '~> 0.1'
 ```
 
 
@@ -64,7 +64,7 @@ I recommend you to try [CocoaSeeds](https://github.com/devxoul/CocoaSeeds), whic
 **Seedfile**
 
 ```ruby
-github 'devxoul/SwiftyImage', '0.1.0', :files => 'SwiftyImage/SwiftyImage.swift'
+github 'devxoul/SwiftyImage', '0.1.1', :files => 'SwiftyImage/SwiftyImage.swift'
 ```
 
 
