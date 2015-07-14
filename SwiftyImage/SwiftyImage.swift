@@ -15,7 +15,51 @@ public enum BorderAlignment {
 }
 
 
-// MARK: - UIImage Extension
+// MARK: - Image Context
+
+public extension UIImage {
+
+    public convenience init?(size: CGSize, opaque: Bool = false, scale: CGFloat = 0, block: (CGContextRef) -> Void) {
+        UIGraphicsBeginImageContextWithOptions(size, opaque, scale)
+        let context = UIGraphicsGetCurrentContext()
+        block(context)
+        let image = CGBitmapContextCreateImage(context)
+        UIGraphicsEndImageContext()
+        self.init(CGImage: image)
+    }
+
+    public func with(contextBlock: (CGContextRef) -> Void) -> UIImage! {
+        return UIImage(size: self.size, opaque: false, scale: self.scale) { context in
+            let rect = CGRect(x: 0, y: 0, width: self.size.width, height: self.size.height)
+            CGContextDrawImage(context, rect, self.CGImage)
+            contextBlock(context)
+        }
+    }
+
+}
+
+
+// MARK: - Image Operator
+
+public func + (lhs: UIImage, rhs: UIImage) -> UIImage {
+    return lhs.with { context in
+        let lhsRect = CGRect(x: 0, y: 0, width: lhs.size.width, height: lhs.size.height)
+        var rhsRect = CGRect(x: 0, y: 0, width: rhs.size.width, height: rhs.size.height)
+
+        if CGRectContainsRect(lhsRect, rhsRect) {
+            rhsRect.origin.x = (lhsRect.size.width - rhsRect.size.width) / 2
+            rhsRect.origin.y = (lhsRect.size.height - rhsRect.size.height) / 2
+        } else {
+            rhsRect.size = lhsRect.size
+        }
+
+        CGContextDrawImage(context, lhsRect, lhs.CGImage)
+        CGContextDrawImage(context, rhsRect, rhs.CGImage)
+    }
+}
+
+
+//MARK: - Image Drawing
 
 public extension UIImage {
 
@@ -35,9 +79,6 @@ public extension UIImage {
         return drawer
     }
 }
-
-
-//MARK: - ImageDrawer
 
 public class ImageDrawer {
 
@@ -118,7 +159,7 @@ public class ImageDrawer {
 
     // MARK: Image
 
-    public func image() -> UIImage {
+    public func image(contextBlock: ((CGContextRef) -> Void)? = nil) -> UIImage {
         switch self.size {
         case .Fixed(let size):
             return self.imageWithSize(size)
@@ -174,24 +215,20 @@ public class ImageDrawer {
             imageSize.height += self.borderWidth * 2
         }
 
-        UIGraphicsBeginImageContextWithOptions(imageSize, false, 0)
-        let context = UIGraphicsGetCurrentContext()
+        let image = UIImage(size: imageSize) { context in
+            self.color.setFill()
+            self.borderColor.setStroke()
 
-        self.color.setFill()
-        self.borderColor.setStroke()
-
-        let path: UIBezierPath
-        if self.cornerRadius > 0 {
-            path = UIBezierPath(roundedRect: rect, cornerRadius: self.cornerRadius)
-        } else {
-            path = UIBezierPath(rect: rect)
-        }
-        path.lineWidth = self.borderWidth
-        path.fill()
-        path.stroke()
-        
-        let image = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
+            let path: UIBezierPath
+            if self.cornerRadius > 0 {
+                path = UIBezierPath(roundedRect: rect, cornerRadius: self.cornerRadius)
+            } else {
+                path = UIBezierPath(rect: rect)
+            }
+            path.lineWidth = self.borderWidth
+            path.fill()
+            path.stroke()
+        }!
 
         if useCache {
             self.dynamicType.cachedImages[self.cacheKey] = image
