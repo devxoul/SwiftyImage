@@ -54,6 +54,37 @@ public class ImageDrawer {
     private var size: Size = .Resizable
 
 
+    // MARK: Cache
+
+    private static var cachedImages = [String: UIImage]()
+    private var cacheKey: String {
+        var attributes = [
+            "color": toString(self.color.hashValue),
+            "borderColor": toString(self.borderColor.hashValue),
+            "borderWidth": toString(self.borderWidth.hashValue),
+            "borderAlignment": toString(self.borderAlignment.hashValue),
+            "cornerRadius": toString(self.cornerRadius.hashValue),
+        ]
+
+        switch self.size {
+        case .Fixed(let size):
+            attributes["size"] = "Fixed(\(size.width), \(size.height))"
+        case .Resizable:
+            attributes["size"] = "Resizable"
+        }
+
+        var serializedAttributes = [String]()
+        for key in sorted(attributes.keys) {
+            if let value = attributes[key] {
+                serializedAttributes.append("\(key):\(value)")
+            }
+        }
+
+        let cacheKey = "|".join(serializedAttributes)
+        return cacheKey
+    }
+
+
     // MARK: Fill
 
     public func color(color: UIColor) -> Self {
@@ -112,7 +143,11 @@ public class ImageDrawer {
         }
     }
 
-    private func imageWithSize(size: CGSize) -> UIImage {
+    private func imageWithSize(size: CGSize, useCache: Bool = true) -> UIImage {
+        if let cachedImage = self.dynamicType.cachedImages[self.cacheKey] where useCache {
+            return cachedImage
+        }
+
         var imageSize = CGSize(width: size.width, height: size.height)
         var rect = CGRect()
         rect.size = imageSize
@@ -157,6 +192,11 @@ public class ImageDrawer {
         
         let image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
+
+        if useCache {
+            self.dynamicType.cachedImages[self.cacheKey] = image
+        }
+
         return image
     }
 }
