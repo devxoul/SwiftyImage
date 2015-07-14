@@ -10,7 +10,7 @@ Features
 --------
 
 * [x] Create images with method chaining
-* [ ] Cache created images with properties
+* [x] Cache created images with properties
 * [x] iOS support
 * [ ] OS X support
 
