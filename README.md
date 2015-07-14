@@ -10,15 +10,14 @@ Features
 --------
 
 * [x] Create images with method chaining
-* [x] Cache created images with properties
+* [x] Create and manipulate images with CGContext
+* [x] Combine images with `+` operator
 * [x] iOS support
 * [ ] OS X support
 
 
 At a Glance
 -----------
-
-Use `$ pod try SwiftyImage` to try with Playground.
 
 ```swift
 UIImage.size(width: 100, height: 100)
@@ -44,38 +43,13 @@ UIImage.resizable()
 ![sample2](https://cloud.githubusercontent.com/assets/931655/8675936/514b7f60-2a81-11e5-8806-26036d8e8ba5.png)
 
 
-Installation
-------------
-
-#### iOS 8+
-
-Use [CocoaPods](https://cocoapods.org). Minimum required version of CocoaPods is 0.36, which supports Swift frameworks.
-
-**Podfile**
-
-```ruby
-pod 'SwiftyImage', '~> 0.1'
-```
-
-
-#### iOS 7
-
-I recommend you to try [CocoaSeeds](https://github.com/devxoul/CocoaSeeds), which uses source code instead of dynamic framework.
-
-**Seedfile**
-
-```ruby
-github 'devxoul/SwiftyImage', '0.1.1', :files => 'SwiftyImage/SwiftyImage.swift'
-```
-
-
-Creating Images
+Getting Started
 ---------------
 
 SwiftyImage provides a simple way to create images with method chaining.
 
 
-#### 1) Start Chaining
+#### Step 1. Start Chaining
 
 Method chaining starts from `UIImage.size()` or `UIImage.resizable()`.
 
@@ -86,7 +60,7 @@ UIImage.resizable() // ...
 ```
 
 
-#### 2) Setting Properties
+#### Step 2. Setting Properties
 
 You can set fill color, border attributes, corner radius, etc.
 
@@ -107,7 +81,7 @@ UIImage.resizable() // resizable image
 ```
 
 
-#### 3) Generating Image
+#### Step 3. Generating Image
 
 Use `.image()` at the end of method chaining to generate image.
 
@@ -143,12 +117,76 @@ imageView.image = UIImage.size(width: 100, height: 100)
 | `.image()` | Generate and return image |
 
 
+Play with CGContext
+-------------------
+
+SwiftyImage also provides a simple method to create or manipulate images with CGContext.
+
+#### Creating Images
+
+```swift
+let image = UIImage(size: CGSize(width: 100, height: 100)) { context in
+    UIColor.lightGrayColor().setFill()
+    CGContextFillEllipseInRect(context, CGRect(x: 0, y: 0, width: 100, height: 100))
+}
+```
+
+
+#### Manipulating Images
+
+```swift
+let newImage = oldImage.with { context in
+    UIColor.lightGrayColor().setFill()
+    CGContextFillEllipseInRect(context, CGRect(x: 0, y: 0, width: 100, height: 100))
+}
+```
+
+
+Image Operator
+--------------
+
+You can easily combine multiple images with `+` operator.
+
+```swift
+let backgroundImage = ...
+let iconImage = ...
+let combinedImage = backgroundImage + iconImage
+```
+
+![combine](https://cloud.githubusercontent.com/assets/931655/8679414/84fb8e5e-2a95-11e5-89ea-8cfbb7ec761d.png)
+
+
+Installation
+------------
+
+#### iOS 8+
+
+Use [CocoaPods](https://cocoapods.org). Minimum required version of CocoaPods is 0.36, which supports Swift frameworks.
+
+**Podfile**
+
+```ruby
+pod 'SwiftyImage', '~> 0.1'
+```
+
+
+#### iOS 7
+
+I recommend you to try [CocoaSeeds](https://github.com/devxoul/CocoaSeeds), which uses source code instead of dynamic framework.
+
+**Seedfile**
+
+```ruby
+github 'devxoul/SwiftyImage', '0.1.1', :files => 'SwiftyImage/SwiftyImage.swift'
+```
+
+
 Playground
 ----------
 
 Use CocoaPods command `$ pod try SwiftyImage` to try Playground!
 
-![playground](https://cloud.githubusercontent.com/assets/931655/8676209/06d13734-2a83-11e5-8921-ec22762743c4.png)
+![playground](https://cloud.githubusercontent.com/assets/931655/8679576/611e1b9a-2a96-11e5-9f34-debb222f28c6.png)
 
 
 License
