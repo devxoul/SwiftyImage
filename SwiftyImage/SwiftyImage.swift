@@ -19,17 +19,23 @@ public enum BorderAlignment {
 
 public extension UIImage {
 
-    public convenience init?(size: CGSize, opaque: Bool = false, scale: CGFloat = 0, block: (CGContextRef) -> Void) {
+    public typealias ContextBlock = (CGContextRef) -> Void
+
+    public class func with(#width: CGFloat, height: CGFloat, block: ContextBlock) -> UIImage {
+        return self.with(size: CGSize(width: width, height: height), block: block)
+    }
+
+    public class func with(#size: CGSize, opaque: Bool = false, scale: CGFloat = 0, block: ContextBlock) -> UIImage {
         UIGraphicsBeginImageContextWithOptions(size, opaque, scale)
         let context = UIGraphicsGetCurrentContext()
         block(context)
-        let image = CGBitmapContextCreateImage(context)
+        let image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
-        self.init(CGImage: image)
+        return image
     }
 
     public func with(contextBlock: (CGContextRef) -> Void) -> UIImage! {
-        return UIImage(size: self.size, opaque: false, scale: self.scale) { context in
+        return UIImage.with(size: self.size, opaque: false, scale: self.scale) { context in
             let rect = CGRect(x: 0, y: 0, width: self.size.width, height: self.size.height)
             CGContextDrawImage(context, rect, self.CGImage)
             contextBlock(context)
@@ -159,7 +165,7 @@ public class ImageDrawer {
 
     // MARK: Image
 
-    public func image(contextBlock: ((CGContextRef) -> Void)? = nil) -> UIImage {
+    public func image() -> UIImage {
         switch self.size {
         case .Fixed(let size):
             return self.imageWithSize(size)
@@ -215,7 +221,7 @@ public class ImageDrawer {
             imageSize.height += self.borderWidth * 2
         }
 
-        let image = UIImage(size: imageSize) { context in
+        var image = UIImage.with(size: imageSize) { context in
             self.color.setFill()
             self.borderColor.setStroke()
 
@@ -228,7 +234,7 @@ public class ImageDrawer {
             path.lineWidth = self.borderWidth
             path.fill()
             path.stroke()
-        }!
+        }
 
         if useCache {
             self.dynamicType.cachedImages[self.cacheKey] = image
