@@ -177,7 +177,7 @@ I recommend you to try [CocoaSeeds](https://github.com/devxoul/CocoaSeeds), whic
 **Seedfile**
 
 ```ruby
-github 'devxoul/SwiftyImage', '0.2.0', :files => 'SwiftyImage/SwiftyImage.swift'
+github 'devxoul/SwiftyImage', '0.2.1', :files => 'SwiftyImage/SwiftyImage.swift'
 ```
 
 
