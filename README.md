@@ -125,7 +125,7 @@ SwiftyImage also provides a simple method to create or manipulate images with CG
 #### Creating Images
 
 ```swift
-let image = UIImage(size: CGSize(width: 100, height: 100)) { context in
+let image = UIImage.with(size: CGSize(width: 100, height: 100)) { context in
     UIColor.lightGrayColor().setFill()
     CGContextFillEllipseInRect(context, CGRect(x: 0, y: 0, width: 100, height: 100))
 }
