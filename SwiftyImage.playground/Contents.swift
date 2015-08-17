@@ -22,6 +22,16 @@ UIImage.size(width: 50, height: 50)
        .corner(radius: 10)
        .image()
 
+UIImage.size(width: 100, height: 100)
+       .color(UIColor.whiteColor())
+       .border(color: UIColor.blueColor())
+       .border(width: 10)
+       .border(alignment: .Outside)
+       .corner(topLeft: 20)
+       .corner(topRight: 15)
+       .corner(bottomRight: 50)
+       .image()
+
 
 //: Resizable image
 //: ---------------
@@ -45,7 +55,7 @@ UIImage.size(width: 50, height: 50)
 //: Create image with context
 //: -------------------------
 
-UIImage(size: CGSize(width: 100, height: 100)) { context in
+UIImage.with(size: CGSize(width: 100, height: 100)) { context in
     UIColor.lightGrayColor().setFill()
     CGContextFillEllipseInRect(context, CGRect(x: 0, y: 0, width: 100, height: 100))
 }
