@@ -261,7 +261,13 @@ public class ImageDrawer {
             self.borderColor.setStroke()
 
             let path: UIBezierPath
-            if cornerRadius > 0 {
+
+            if self.cornerRadiusTopLeft == self.cornerRadiusTopRight &&
+               self.cornerRadiusTopLeft == self.cornerRadiusBottomLeft &&
+               self.cornerRadiusTopLeft == self.cornerRadiusBottomRight &&
+               self.cornerRadiusTopLeft > 0 {
+                path = UIBezierPath(roundedRect: rect, cornerRadius: self.cornerRadiusTopLeft)
+            } else if cornerRadius > 0 {
                 let startAngle = CGFloat(M_PI)
 
                 let topLeftCenter = CGPoint(
