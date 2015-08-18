@@ -97,13 +97,13 @@ imageView.image = UIImage.size(width: 100, height: 100)
 
 ### Methods Available
 
-| Method | Description |
+| Start Chaining Method | Description |
 |---|---|
 | `.size(width: CGFloat, height: CGFloat)` | Start chaining for fixed size image |
 | `.size(CGSize)` | Start chaining for fixed size image |
 | `.resizable()` | Start chaining for resizable image |
 
-| Method | Description |
+| Setting Property Method | Description |
 |---|---|
 | `.color(UIColor)` | Set fill color |
 | `.border(width: CGFloat)` | Set border width |
@@ -116,7 +116,7 @@ imageView.image = UIImage.size(width: 100, height: 100)
 | `.corner(bottomRight: CGFloat)` | Set bottom right corner radius of image |
 
 
-| Method | Description |
+| Generating Image Method | Description |
 |---|---|
 | `.image()` | Generate and return image |
 
@@ -163,26 +163,18 @@ let combinedImage = backgroundImage + iconImage
 Installation
 ------------
 
-#### iOS 8+
+- **For iOS 8+ projects:** Use [CocoaPods](https://cocoapods.org) with Podfile:
 
-Use [CocoaPods](https://cocoapods.org). Minimum required version of CocoaPods is 0.36, which supports Swift frameworks.
-
-**Podfile**
-
-```ruby
-pod 'SwiftyImage', '~> 0.2'
-```
+    ```ruby
+    pod 'SwiftyImage', '~> 0.2'
+    ```
 
 
-#### iOS 7
+- **For iOS 7 projects:** I recommend you to try [CocoaSeeds](https://github.com/devxoul/CocoaSeeds), which uses source code instead of dynamic frameworks. Sample Seedfile:
 
-I recommend you to try [CocoaSeeds](https://github.com/devxoul/CocoaSeeds), which uses source code instead of dynamic framework.
-
-**Seedfile**
-
-```ruby
-github 'devxoul/SwiftyImage', '0.2.1', :files => 'SwiftyImage/SwiftyImage.swift'
-```
+    ```ruby
+    github 'devxoul/SwiftyImage', '0.2.1', :files => 'SwiftyImage/SwiftyImage.swift'
+    ```
 
 
 Playground
