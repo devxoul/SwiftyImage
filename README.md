@@ -109,7 +109,11 @@ imageView.image = UIImage.size(width: 100, height: 100)
 | `.border(width: CGFloat)` | Set border width |
 | `.border(color: UIColor)` | Set border color |
 | `.border(alignment: BorderAlignment)` | Set border alignment. Same with Photoshop's.<br> `.Inside`, `.Center`, `.Outside` |
-| `.corner(radius: CGFloat)` | Set corner radius of image |
+| `.corner(radius: CGFloat)` | Set all corners radius of image |
+| `.corner(topLeft: CGFloat)` | Set top left corner radius of image |
+| `.corner(topRight: CGFloat)` | Set top right corner radius of image |
+| `.corner(bottomLeft: CGFloat)` | Set bottom left corner radius of image |
+| `.corner(bottomRight: CGFloat)` | Set bottom right corner radius of image |
 
 
 | Method | Description |
