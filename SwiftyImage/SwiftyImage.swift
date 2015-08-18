@@ -207,25 +207,15 @@ public class ImageDrawer {
         case .Resizable:
             self.borderAlignment = .Inside
 
-            let imageSize: CGFloat
             let cornerRadius = max(
                 self.cornerRadiusTopLeft, self.cornerRadiusTopRight,
                 self.cornerRadiusBottomLeft, self.cornerRadiusBottomRight
             )
-
-            if cornerRadius > 0 {
-                imageSize = cornerRadius * 2
-            } else {
-                imageSize = borderWidth * 2 + 1
-            }
+            let capSize = ceil(max(cornerRadius, self.borderWidth))
+            let imageSize = capSize * 2 + 1
 
             let image = self.imageWithSize(CGSize(width: imageSize, height: imageSize))
-            let capInsets = UIEdgeInsets(
-                top: max(self.cornerRadiusTopLeft, self.cornerRadiusTopRight),
-                left: max(self.cornerRadiusTopLeft, self.cornerRadiusBottomLeft),
-                bottom: max(self.cornerRadiusBottomLeft, self.cornerRadiusBottomRight),
-                right: max(self.cornerRadiusTopRight, self.cornerRadiusBottomRight)
-            )
+            let capInsets = UIEdgeInsets(top: capSize, left: capSize, bottom: capSize, right: capSize)
             return image.resizableImageWithCapInsets(capInsets)
         }
     }
@@ -274,44 +264,79 @@ public class ImageDrawer {
             if cornerRadius > 0 {
                 let startAngle = CGFloat(M_PI)
 
-                let topLeftCenterX = self.cornerRadiusTopLeft + self.borderWidth / 2
-                let topLeftCenterY = self.cornerRadiusTopLeft + self.borderWidth / 2
-
-                let topRightCenterX = imageSize.width - self.cornerRadiusTopRight - self.borderWidth / 2
-                let topRightCenterY = self.cornerRadiusTopRight + self.borderWidth / 2
-
-                let bottomRightCenterX = imageSize.width - self.cornerRadiusBottomRight - self.borderWidth / 2
-                let bottomRightCenterY = imageSize.height - self.cornerRadiusBottomRight - self.borderWidth / 2
-
-                let bottomLeftCenterX = self.cornerRadiusBottomLeft + self.borderWidth / 2
-                let bottomLeftCenterY = imageSize.height - self.cornerRadiusBottomLeft - self.borderWidth / 2
+                let topLeftCenter = CGPoint(
+                    x: self.cornerRadiusTopLeft + self.borderWidth / 2,
+                    y: self.cornerRadiusTopLeft + self.borderWidth / 2
+                )
+                let topRightCenter = CGPoint(
+                    x: imageSize.width - self.cornerRadiusTopRight - self.borderWidth / 2,
+                    y: self.cornerRadiusTopRight + self.borderWidth / 2
+                )
+                let bottomRightCenter = CGPoint(
+                    x: imageSize.width - self.cornerRadiusBottomRight - self.borderWidth / 2,
+                    y: imageSize.height - self.cornerRadiusBottomRight - self.borderWidth / 2
+                )
+                let bottomLeftCenter = CGPoint(
+                    x: self.cornerRadiusBottomLeft + self.borderWidth / 2,
+                    y: imageSize.height - self.cornerRadiusBottomLeft - self.borderWidth / 2
+                )
 
                 var mutablePath = UIBezierPath()
-                mutablePath.addArcWithCenter(CGPoint(x: topLeftCenterX, y: topLeftCenterY),
-                    radius: self.cornerRadiusTopLeft,
-                    startAngle: startAngle,
-                    endAngle: 1.5 * startAngle,
-                    clockwise: true
-                )
-                mutablePath.addArcWithCenter(CGPoint(x: topRightCenterX , y: topRightCenterY),
-                    radius: self.cornerRadiusTopRight,
-                    startAngle: 1.5 * startAngle,
-                    endAngle: 2 * startAngle,
-                    clockwise: true
-                )
-                mutablePath.addArcWithCenter(CGPoint(x: bottomRightCenterX , y: bottomRightCenterY),
-                    radius: self.cornerRadiusBottomRight,
-                    startAngle: 2 * startAngle,
-                    endAngle: 2.5 * startAngle,
-                    clockwise: true
-                )
-                mutablePath.addArcWithCenter(CGPoint(x: bottomLeftCenterX , y: bottomLeftCenterY),
-                    radius: self.cornerRadiusBottomLeft,
-                    startAngle: 2.5 * startAngle,
-                    endAngle: 3 * startAngle,
-                    clockwise: true
-                )
-                mutablePath.addLineToPoint(CGPoint(x: self.borderWidth / 2, y: topLeftCenterY))
+
+                // top left
+                if self.cornerRadiusTopLeft > 0 {
+                    mutablePath.addArcWithCenter(topLeftCenter,
+                        radius: self.cornerRadiusTopLeft,
+                        startAngle: startAngle,
+                        endAngle: 1.5 * startAngle,
+                        clockwise: true
+                    )
+                } else {
+                    mutablePath.moveToPoint(topLeftCenter)
+                }
+
+                // top right
+                if self.cornerRadiusTopRight > 0 {
+                    mutablePath.addArcWithCenter(topRightCenter,
+                        radius: self.cornerRadiusTopRight,
+                        startAngle: 1.5 * startAngle,
+                        endAngle: 2 * startAngle,
+                        clockwise: true
+                    )
+                } else {
+                    mutablePath.addLineToPoint(topRightCenter)
+                }
+
+                // bottom right
+                if self.cornerRadiusBottomRight > 0 {
+                    mutablePath.addArcWithCenter(bottomRightCenter,
+                        radius: self.cornerRadiusBottomRight,
+                        startAngle: 2 * startAngle,
+                        endAngle: 2.5 * startAngle,
+                        clockwise: true
+                    )
+                } else {
+                    mutablePath.addLineToPoint(bottomRightCenter)
+                }
+
+                // bottom left
+                if self.cornerRadiusBottomLeft > 0 {
+                    mutablePath.addArcWithCenter(bottomLeftCenter,
+                        radius: self.cornerRadiusBottomLeft,
+                        startAngle: 2.5 * startAngle,
+                        endAngle: 3 * startAngle,
+                        clockwise: true
+                    )
+                } else {
+                    mutablePath.addLineToPoint(bottomLeftCenter)
+                }
+
+                if self.cornerRadiusTopLeft > 0 {
+                    mutablePath.addLineToPoint(CGPoint(x: self.borderWidth / 2, y: topLeftCenter.y))
+                } else {
+                    mutablePath.addLineToPoint(topLeftCenter)
+                }
+
                 path = mutablePath
             } else {
                 path = UIBezierPath(rect: rect)
