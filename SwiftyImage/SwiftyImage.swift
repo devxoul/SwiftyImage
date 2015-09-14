@@ -19,15 +19,18 @@ public enum BorderAlignment {
 
 public extension UIImage {
 
-    public typealias ContextBlock = (CGContextRef) -> Void
+    public typealias ContextBlock = CGContextRef -> Void
 
-    public class func with(#width: CGFloat, height: CGFloat, block: ContextBlock) -> UIImage {
+    public class func with(width width: CGFloat, height: CGFloat, block: ContextBlock) -> UIImage {
         return self.with(size: CGSize(width: width, height: height), block: block)
     }
 
-    public class func with(#size: CGSize, opaque: Bool = false, scale: CGFloat = 0, block: ContextBlock) -> UIImage {
+    public class func with(size size: CGSize,
+                           opaque: Bool = false,
+                           scale: CGFloat = 0,
+                           block: ContextBlock) -> UIImage {
         UIGraphicsBeginImageContextWithOptions(size, opaque, scale)
-        let context = UIGraphicsGetCurrentContext()
+        let context = UIGraphicsGetCurrentContext()!
         block(context)
         let image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
@@ -69,7 +72,7 @@ public func + (lhs: UIImage, rhs: UIImage) -> UIImage {
 
 public extension UIImage {
 
-    public class func size(#width: CGFloat, height: CGFloat) -> ImageDrawer {
+    public class func size(width width: CGFloat, height: CGFloat) -> ImageDrawer {
         return self.size(CGSize(width: width, height: height))
     }
 
@@ -108,16 +111,15 @@ public class ImageDrawer {
 
     private static var cachedImages = [String: UIImage]()
     private var cacheKey: String {
-        var attributes = [
-            "color": toString(self.color.hashValue),
-            "borderColor": toString(self.borderColor.hashValue),
-            "borderWidth": toString(self.borderWidth.hashValue),
-            "borderAlignment": toString(self.borderAlignment.hashValue),
-            "cornerRadiusTopLeft": toString(self.cornerRadiusTopLeft.hashValue),
-            "cornerRadiusTopRight": toString(self.cornerRadiusTopRight.hashValue),
-            "cornerRadiusBottomLeft": toString(self.cornerRadiusBottomLeft.hashValue),
-            "cornerRadiusBottomRight": toString(self.cornerRadiusBottomRight.hashValue),
-        ]
+        var attributes = [String: String]()
+        attributes["color"] = String(self.color.hashValue)
+        attributes["borderColor"] = String(self.borderColor.hashValue)
+        attributes["borderWidth"] = String(self.borderWidth.hashValue)
+        attributes["borderAlignment"] = String(self.borderAlignment.hashValue)
+        attributes["cornerRadiusTopLeft"] = String(self.cornerRadiusTopLeft.hashValue)
+        attributes["cornerRadiusTopRight"] = String(self.cornerRadiusTopRight.hashValue)
+        attributes["cornerRadiusBottomLeft"] = String(self.cornerRadiusBottomLeft.hashValue)
+        attributes["cornerRadiusBottomRight"] = String(self.cornerRadiusBottomRight.hashValue)
 
         switch self.size {
         case .Fixed(let size):
@@ -127,13 +129,13 @@ public class ImageDrawer {
         }
 
         var serializedAttributes = [String]()
-        for key in sorted(attributes.keys) {
+        for key in attributes.keys.sort() {
             if let value = attributes[key] {
                 serializedAttributes.append("\(key):\(value)")
             }
         }
 
-        let cacheKey = "|".join(serializedAttributes)
+        let cacheKey = serializedAttributes.joinWithSeparator("|")
         return cacheKey
     }
 
@@ -148,47 +150,47 @@ public class ImageDrawer {
 
     // MARK: Border
 
-    public func border(#color: UIColor) -> Self {
+    public func border(color color: UIColor) -> Self {
         self.borderColor = color
         return self
     }
 
-    public func border(#width: CGFloat) -> Self {
+    public func border(width width: CGFloat) -> Self {
         self.borderWidth = width
         return self
     }
 
-    public func border(#alignment: BorderAlignment) -> Self {
+    public func border(alignment alignment: BorderAlignment) -> Self {
         self.borderAlignment = alignment
         return self
     }
 
-    public func corner(#radius: CGFloat) -> Self {
+    public func corner(radius radius: CGFloat) -> Self {
         self.corner(topLeft: radius, topRight: radius, bottomLeft: radius, bottomRight: radius)
         return self
     }
 
-    public func corner(#topLeft: CGFloat) -> Self {
+    public func corner(topLeft topLeft: CGFloat) -> Self {
         self.cornerRadiusTopLeft = topLeft
         return self
     }
 
-    public func corner(#topRight: CGFloat) -> Self {
+    public func corner(topRight topRight: CGFloat) -> Self {
         self.cornerRadiusTopRight = topRight
         return self
     }
 
-    public func corner(#bottomLeft: CGFloat) -> Self {
+    public func corner(bottomLeft bottomLeft: CGFloat) -> Self {
         self.cornerRadiusBottomLeft = bottomLeft
         return self
     }
 
-    public func corner(#bottomRight: CGFloat) -> Self {
+    public func corner(bottomRight bottomRight: CGFloat) -> Self {
         self.cornerRadiusBottomRight = bottomRight
         return self
     }
 
-    public func corner(#topLeft: CGFloat, topRight: CGFloat, bottomLeft: CGFloat, bottomRight: CGFloat) -> Self {
+    public func corner(topLeft topLeft: CGFloat, topRight: CGFloat, bottomLeft: CGFloat, bottomRight: CGFloat) -> Self {
         self.corner(topLeft: topLeft)
         self.corner(topRight: topRight)
         self.corner(bottomLeft: bottomLeft)
@@ -256,7 +258,7 @@ public class ImageDrawer {
             self.cornerRadiusBottomLeft, self.cornerRadiusBottomRight
         )
 
-        var image = UIImage.with(size: imageSize) { context in
+        let image = UIImage.with(size: imageSize) { context in
             self.color.setFill()
             self.borderColor.setStroke()
 
@@ -287,7 +289,7 @@ public class ImageDrawer {
                     y: imageSize.height - self.cornerRadiusBottomLeft - self.borderWidth / 2
                 )
 
-                var mutablePath = UIBezierPath()
+                let mutablePath = UIBezierPath()
 
                 // top left
                 if self.cornerRadiusTopLeft > 0 {
