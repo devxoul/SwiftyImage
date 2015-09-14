@@ -1,6 +1,7 @@
 SwiftyImage
 ===========
 
+![Swift 2.0](https://img.shields.io/badge/Swift-2.0-orange.svg)
 [![CocoaPods](http://img.shields.io/cocoapods/v/SwiftyImage.svg?style=flat)](https://cocoapods.org/pods/SwiftyImage)
 
 The most sexy way to use images in Swift.
