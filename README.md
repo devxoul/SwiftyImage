@@ -167,14 +167,14 @@ Installation
 - **For iOS 8+ projects:** Use [CocoaPods](https://cocoapods.org) with Podfile:
 
     ```ruby
-    pod 'SwiftyImage', '~> 0.4'
+    pod 'SwiftyImage', '~> 0.5'
     ```
 
 
 - **For iOS 7 projects:** I recommend you to try [CocoaSeeds](https://github.com/devxoul/CocoaSeeds), which uses source code instead of dynamic frameworks. Sample Seedfile:
 
     ```ruby
-    github 'devxoul/SwiftyImage', '0.4.0', :files => 'SwiftyImage/SwiftyImage.swift'
+    github 'devxoul/SwiftyImage', '0.5.0', :files => 'SwiftyImage/SwiftyImage.swift'
     ```
 
 
