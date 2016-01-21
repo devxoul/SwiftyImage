@@ -361,3 +361,22 @@ public class ImageDrawer {
         return image
     }
 }
+
+
+// MARK: - Color overlay
+
+public extension UIImage {
+
+    public func with(color color: UIColor) -> UIImage {
+        return UIImage.with(size: self.size) { context in
+            CGContextTranslateCTM(context, 0, self.size.height)
+            CGContextScaleCTM(context, 1, -1)
+            CGContextSetBlendMode(context, .Normal)
+            let rect = CGRect(origin: .zero, size: self.size)
+            CGContextClipToMask(context, rect, self.CGImage)
+            color.setFill()
+            CGContextFillRect(context, rect)
+        }
+    }
+
+}
