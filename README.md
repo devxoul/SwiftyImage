@@ -20,6 +20,8 @@ Features
 At a Glance
 -----------
 
+##### Creating Images
+
 ```swift
 UIImage.size(width: 100, height: 100)
        .color(UIColor.whiteColor())
@@ -42,6 +44,12 @@ UIImage.resizable()
 ```
 
 ![sample2](https://cloud.githubusercontent.com/assets/931655/8675936/514b7f60-2a81-11e5-8806-26036d8e8ba5.png)
+
+##### Creating Color Overlayed Image
+
+```swift
+let image = UIImage(named: "myArrow").with(color: UIColor.blueColor())
+```
 
 
 Getting Started
