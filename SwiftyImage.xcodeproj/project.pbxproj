@@ -7,11 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		03011EFE1D85CF21001AEE18 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 03011EFD1D85CF21001AEE18 /* Info.plist */; };
-		03B119441B54E2AB00427302 /* SwiftyImage.h in Headers */ = {isa = PBXBuildFile; fileRef = 03B119431B54E2AB00427302 /* SwiftyImage.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		03011F021D85CF71001AEE18 /* SwiftyImage.h in Headers */ = {isa = PBXBuildFile; fileRef = 03011F001D85CF71001AEE18 /* SwiftyImage.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		03011F031D85CF71001AEE18 /* SwiftyImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03011F011D85CF71001AEE18 /* SwiftyImage.swift */; };
 		03B1194A1B54E2AB00427302 /* SwiftyImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 03B1193E1B54E2AB00427302 /* SwiftyImage.framework */; };
 		03B119511B54E2AB00427302 /* SwiftyImageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B119501B54E2AB00427302 /* SwiftyImageTests.swift */; };
-		03B1195B1B54E35A00427302 /* SwiftyImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B1195A1B54E35A00427302 /* SwiftyImage.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -25,14 +24,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		03011EFD1D85CF21001AEE18 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		03011F001D85CF71001AEE18 /* SwiftyImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SwiftyImage.h; sourceTree = "<group>"; };
+		03011F011D85CF71001AEE18 /* SwiftyImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyImage.swift; sourceTree = "<group>"; };
+		03011F051D85CF75001AEE18 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		03011F071D85CF7F001AEE18 /* SwiftyImage.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = SwiftyImage.playground; sourceTree = "<group>"; };
 		03B1193E1B54E2AB00427302 /* SwiftyImage.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftyImage.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		03B119431B54E2AB00427302 /* SwiftyImage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SwiftyImage.h; sourceTree = "<group>"; };
 		03B119491B54E2AB00427302 /* SwiftyImageTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftyImageTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		03B1194F1B54E2AB00427302 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		03B119501B54E2AB00427302 /* SwiftyImageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftyImageTests.swift; sourceTree = "<group>"; };
-		03B1195A1B54E35A00427302 /* SwiftyImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyImage.swift; sourceTree = "<group>"; };
-		03B1195C1B54E3D300427302 /* SwiftyImage.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = SwiftyImage.playground; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,20 +53,30 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		03011EFC1D85CF21001AEE18 /* Supporting Files */ = {
+		03011EFF1D85CF71001AEE18 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				03011EFD1D85CF21001AEE18 /* Info.plist */,
+				03011F001D85CF71001AEE18 /* SwiftyImage.h */,
+				03011F011D85CF71001AEE18 /* SwiftyImage.swift */,
 			);
-			name = "Supporting Files";
-			path = "../../URLNavigator/Supporting Files";
+			path = Sources;
+			sourceTree = "<group>";
+		};
+		03011F041D85CF75001AEE18 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				03011F051D85CF75001AEE18 /* Info.plist */,
+			);
+			path = "Supporting Files";
 			sourceTree = "<group>";
 		};
 		03B119341B54E2AB00427302 = {
 			isa = PBXGroup;
 			children = (
-				03B119401B54E2AB00427302 /* SwiftyImage */,
+				03011F071D85CF7F001AEE18 /* SwiftyImage.playground */,
+				03011EFF1D85CF71001AEE18 /* Sources */,
 				03B1194D1B54E2AB00427302 /* SwiftyImageTests */,
+				03011F041D85CF75001AEE18 /* Supporting Files */,
 				03B1193F1B54E2AB00427302 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -79,17 +88,6 @@
 				03B119491B54E2AB00427302 /* SwiftyImageTests.xctest */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		03B119401B54E2AB00427302 /* SwiftyImage */ = {
-			isa = PBXGroup;
-			children = (
-				03B119431B54E2AB00427302 /* SwiftyImage.h */,
-				03B1195A1B54E35A00427302 /* SwiftyImage.swift */,
-				03B1195C1B54E3D300427302 /* SwiftyImage.playground */,
-				03011EFC1D85CF21001AEE18 /* Supporting Files */,
-			);
-			path = SwiftyImage;
 			sourceTree = "<group>";
 		};
 		03B1194D1B54E2AB00427302 /* SwiftyImageTests */ = {
@@ -116,7 +114,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				03B119441B54E2AB00427302 /* SwiftyImage.h in Headers */,
+				03011F021D85CF71001AEE18 /* SwiftyImage.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -202,7 +200,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				03011EFE1D85CF21001AEE18 /* Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -220,7 +217,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				03B1195B1B54E35A00427302 /* SwiftyImage.swift in Sources */,
+				03011F031D85CF71001AEE18 /* SwiftyImage.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -283,7 +280,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -327,7 +324,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
@@ -347,7 +344,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = SwiftyImage/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/SwiftyImageTests/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "kr.xoul.$(PRODUCT_NAME:rfc1034identifier)";
@@ -367,7 +364,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = SwiftyImage/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/SwiftyImageTests/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "kr.xoul.$(PRODUCT_NAME:rfc1034identifier)";
@@ -380,6 +377,7 @@
 		03B119581B54E2AB00427302 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -399,6 +397,7 @@
 		03B119591B54E2AB00427302 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
