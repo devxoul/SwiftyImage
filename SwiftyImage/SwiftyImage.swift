@@ -40,7 +40,7 @@ public extension UIImage {
     public func with(contextBlock: (CGContextRef) -> Void) -> UIImage! {
         return UIImage.with(size: self.size, opaque: false, scale: self.scale) { context in
             let rect = CGRect(x: 0, y: 0, width: self.size.width, height: self.size.height)
-            CGContextDrawImage(context, rect, self.CGImage)
+            self.drawInRect(rect)
             contextBlock(context)
         }
     }
@@ -62,8 +62,8 @@ public func + (lhs: UIImage, rhs: UIImage) -> UIImage {
             rhsRect.size = lhsRect.size
         }
 
-        CGContextDrawImage(context, lhsRect, lhs.CGImage)
-        CGContextDrawImage(context, rhsRect, rhs.CGImage)
+        lhs.drawInRect(lhsRect)
+        rhs.drawInRect(rhsRect)
     }
 }
 
