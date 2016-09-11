@@ -9,9 +9,9 @@
 import UIKit
 
 public enum BorderAlignment {
-    case Inside
-    case Center
-    case Outside
+    case inside
+    case center
+    case outside
 }
 
 
@@ -19,13 +19,13 @@ public enum BorderAlignment {
 
 public extension UIImage {
 
-    public typealias ContextBlock = CGContextRef -> Void
+    public typealias ContextBlock = (CGContext) -> Void
 
-    public class func with(width width: CGFloat, height: CGFloat, block: ContextBlock) -> UIImage {
+    public class func with(width: CGFloat, height: CGFloat, block: ContextBlock) -> UIImage {
         return self.with(size: CGSize(width: width, height: height), block: block)
     }
 
-    public class func with(size size: CGSize,
+    public class func with(size: CGSize,
                            opaque: Bool = false,
                            scale: CGFloat = 0,
                            block: ContextBlock) -> UIImage {
@@ -34,13 +34,13 @@ public extension UIImage {
         block(context)
         let image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
-        return image
+        return image ?? UIImage()
     }
 
-    public func with(contextBlock: (CGContextRef) -> Void) -> UIImage! {
+    public func with(_ contextBlock: (CGContext) -> Void) -> UIImage! {
         return UIImage.with(size: self.size, opaque: false, scale: self.scale) { context in
             let rect = CGRect(x: 0, y: 0, width: self.size.width, height: self.size.height)
-            self.drawInRect(rect)
+            self.draw(in: rect)
             contextBlock(context)
         }
     }
@@ -55,15 +55,15 @@ public func + (lhs: UIImage, rhs: UIImage) -> UIImage {
         let lhsRect = CGRect(x: 0, y: 0, width: lhs.size.width, height: lhs.size.height)
         var rhsRect = CGRect(x: 0, y: 0, width: rhs.size.width, height: rhs.size.height)
 
-        if CGRectContainsRect(lhsRect, rhsRect) {
+        if lhsRect.contains(rhsRect) {
             rhsRect.origin.x = (lhsRect.size.width - rhsRect.size.width) / 2
             rhsRect.origin.y = (lhsRect.size.height - rhsRect.size.height) / 2
         } else {
             rhsRect.size = lhsRect.size
         }
 
-        lhs.drawInRect(lhsRect)
-        rhs.drawInRect(rhsRect)
+        lhs.draw(in: lhsRect)
+        rhs.draw(in: rhsRect)
     }
 }
 
@@ -72,39 +72,39 @@ public func + (lhs: UIImage, rhs: UIImage) -> UIImage {
 
 public extension UIImage {
 
-    public class func size(width width: CGFloat, height: CGFloat) -> ImageDrawer {
+    public class func size(width: CGFloat, height: CGFloat) -> ImageDrawer {
         return self.size(CGSize(width: width, height: height))
     }
 
-    public class func size(size: CGSize) -> ImageDrawer {
+    public class func size(_ size: CGSize) -> ImageDrawer {
         let drawer = ImageDrawer()
-        drawer.size = .Fixed(size: size)
+        drawer.size = .fixed(size)
         return drawer
     }
 
     public class func resizable() -> ImageDrawer {
         let drawer = ImageDrawer()
-        drawer.size = .Resizable
+        drawer.size = .resizable
         return drawer
     }
 }
 
-public class ImageDrawer {
+open class ImageDrawer {
 
     public enum Size {
-        case Fixed(size: CGSize)
-        case Resizable
+        case fixed(CGSize)
+        case resizable
     }
 
-    private var color = UIColor.clearColor()
-    private var borderColor = UIColor.blackColor()
-    private var borderWidth: CGFloat = 0
-    private var borderAlignment: BorderAlignment = .Inside
-    private var cornerRadiusTopLeft: CGFloat = 0
-    private var cornerRadiusTopRight: CGFloat = 0
-    private var cornerRadiusBottomLeft: CGFloat = 0
-    private var cornerRadiusBottomRight: CGFloat = 0
-    private var size: Size = .Resizable
+    fileprivate var color = UIColor.clear
+    fileprivate var borderColor = UIColor.black
+    fileprivate var borderWidth: CGFloat = 0
+    fileprivate var borderAlignment: BorderAlignment = .inside
+    fileprivate var cornerRadiusTopLeft: CGFloat = 0
+    fileprivate var cornerRadiusTopRight: CGFloat = 0
+    fileprivate var cornerRadiusBottomLeft: CGFloat = 0
+    fileprivate var cornerRadiusBottomRight: CGFloat = 0
+    fileprivate var size: Size = .resizable
 
 
     // MARK: Cache
@@ -122,27 +122,27 @@ public class ImageDrawer {
         attributes["cornerRadiusBottomRight"] = String(self.cornerRadiusBottomRight.hashValue)
 
         switch self.size {
-        case .Fixed(let size):
+        case .fixed(let size):
             attributes["size"] = "Fixed(\(size.width), \(size.height))"
-        case .Resizable:
+        case .resizable:
             attributes["size"] = "Resizable"
         }
 
         var serializedAttributes = [String]()
-        for key in attributes.keys.sort() {
+        for key in attributes.keys.sorted() {
             if let value = attributes[key] {
                 serializedAttributes.append("\(key):\(value)")
             }
         }
 
-        let cacheKey = serializedAttributes.joinWithSeparator("|")
+        let cacheKey = serializedAttributes.joined(separator: "|")
         return cacheKey
     }
 
 
     // MARK: Fill
 
-    public func color(color: UIColor) -> Self {
+    open func color(_ color: UIColor) -> Self {
         self.color = color
         return self
     }
@@ -150,64 +150,63 @@ public class ImageDrawer {
 
     // MARK: Border
 
-    public func border(color color: UIColor) -> Self {
+    open func border(color: UIColor) -> Self {
         self.borderColor = color
         return self
     }
 
-    public func border(width width: CGFloat) -> Self {
+    open func border(width: CGFloat) -> Self {
         self.borderWidth = width
         return self
     }
 
-    public func border(alignment alignment: BorderAlignment) -> Self {
+    open func border(alignment: BorderAlignment) -> Self {
         self.borderAlignment = alignment
         return self
     }
 
-    public func corner(radius radius: CGFloat) -> Self {
-        self.corner(topLeft: radius, topRight: radius, bottomLeft: radius, bottomRight: radius)
-        return self
+    open func corner(radius: CGFloat) -> Self {
+        return self.corner(topLeft: radius, topRight: radius, bottomLeft: radius, bottomRight: radius)
     }
 
-    public func corner(topLeft topLeft: CGFloat) -> Self {
+    open func corner(topLeft: CGFloat) -> Self {
         self.cornerRadiusTopLeft = topLeft
         return self
     }
 
-    public func corner(topRight topRight: CGFloat) -> Self {
+    open func corner(topRight: CGFloat) -> Self {
         self.cornerRadiusTopRight = topRight
         return self
     }
 
-    public func corner(bottomLeft bottomLeft: CGFloat) -> Self {
+    open func corner(bottomLeft: CGFloat) -> Self {
         self.cornerRadiusBottomLeft = bottomLeft
         return self
     }
 
-    public func corner(bottomRight bottomRight: CGFloat) -> Self {
+    open func corner(bottomRight: CGFloat) -> Self {
         self.cornerRadiusBottomRight = bottomRight
         return self
     }
 
-    public func corner(topLeft topLeft: CGFloat, topRight: CGFloat, bottomLeft: CGFloat, bottomRight: CGFloat) -> Self {
-        self.corner(topLeft: topLeft)
-        self.corner(topRight: topRight)
-        self.corner(bottomLeft: bottomLeft)
-        self.corner(bottomRight: bottomRight)
+    open func corner(topLeft: CGFloat, topRight: CGFloat, bottomLeft: CGFloat, bottomRight: CGFloat) -> Self {
         return self
+            .corner(topLeft: topLeft)
+            .corner(topRight: topRight)
+            .corner(bottomLeft: bottomLeft)
+            .corner(bottomRight: bottomRight)
     }
 
 
     // MARK: Image
 
-    public func image() -> UIImage {
+    open var image: UIImage {
         switch self.size {
-        case .Fixed(let size):
+        case .fixed(let size):
             return self.imageWithSize(size)
 
-        case .Resizable:
-            self.borderAlignment = .Inside
+        case .resizable:
+            self.borderAlignment = .inside
 
             let cornerRadius = max(
                 self.cornerRadiusTopLeft, self.cornerRadiusTopRight,
@@ -218,12 +217,12 @@ public class ImageDrawer {
 
             let image = self.imageWithSize(CGSize(width: imageSize, height: imageSize))
             let capInsets = UIEdgeInsets(top: capSize, left: capSize, bottom: capSize, right: capSize)
-            return image.resizableImageWithCapInsets(capInsets)
+            return image.resizableImage(withCapInsets: capInsets)
         }
     }
 
-    private func imageWithSize(size: CGSize, useCache: Bool = true) -> UIImage {
-        if let cachedImage = self.dynamicType.cachedImages[self.cacheKey] where useCache {
+    private func imageWithSize(_ size: CGSize, useCache: Bool = true) -> UIImage {
+        if let cachedImage = type(of: self).cachedImages[self.cacheKey], useCache {
             return cachedImage
         }
 
@@ -232,19 +231,19 @@ public class ImageDrawer {
         rect.size = imageSize
 
         switch self.borderAlignment {
-        case .Inside:
+        case .inside:
             rect.origin.x += self.borderWidth / 2
             rect.origin.y += self.borderWidth / 2
             rect.size.width -= self.borderWidth
             rect.size.height -= self.borderWidth
 
-        case .Center:
+        case .center:
             rect.origin.x += self.borderWidth / 2
             rect.origin.y += self.borderWidth / 2
             imageSize.width += self.borderWidth
             imageSize.height += self.borderWidth
 
-        case .Outside:
+        case .outside:
             rect.origin.x += self.borderWidth / 2
             rect.origin.y += self.borderWidth / 2
             rect.size.width += self.borderWidth
@@ -293,56 +292,56 @@ public class ImageDrawer {
 
                 // top left
                 if self.cornerRadiusTopLeft > 0 {
-                    mutablePath.addArcWithCenter(topLeftCenter,
+                    mutablePath.addArc(withCenter: topLeftCenter,
                         radius: self.cornerRadiusTopLeft,
                         startAngle: startAngle,
                         endAngle: 1.5 * startAngle,
                         clockwise: true
                     )
                 } else {
-                    mutablePath.moveToPoint(topLeftCenter)
+                    mutablePath.move(to: topLeftCenter)
                 }
 
                 // top right
                 if self.cornerRadiusTopRight > 0 {
-                    mutablePath.addArcWithCenter(topRightCenter,
+                    mutablePath.addArc(withCenter: topRightCenter,
                         radius: self.cornerRadiusTopRight,
                         startAngle: 1.5 * startAngle,
                         endAngle: 2 * startAngle,
                         clockwise: true
                     )
                 } else {
-                    mutablePath.addLineToPoint(topRightCenter)
+                    mutablePath.addLine(to: topRightCenter)
                 }
 
                 // bottom right
                 if self.cornerRadiusBottomRight > 0 {
-                    mutablePath.addArcWithCenter(bottomRightCenter,
+                    mutablePath.addArc(withCenter: bottomRightCenter,
                         radius: self.cornerRadiusBottomRight,
                         startAngle: 2 * startAngle,
                         endAngle: 2.5 * startAngle,
                         clockwise: true
                     )
                 } else {
-                    mutablePath.addLineToPoint(bottomRightCenter)
+                    mutablePath.addLine(to: bottomRightCenter)
                 }
 
                 // bottom left
                 if self.cornerRadiusBottomLeft > 0 {
-                    mutablePath.addArcWithCenter(bottomLeftCenter,
+                    mutablePath.addArc(withCenter: bottomLeftCenter,
                         radius: self.cornerRadiusBottomLeft,
                         startAngle: 2.5 * startAngle,
                         endAngle: 3 * startAngle,
                         clockwise: true
                     )
                 } else {
-                    mutablePath.addLineToPoint(bottomLeftCenter)
+                    mutablePath.addLine(to: bottomLeftCenter)
                 }
 
                 if self.cornerRadiusTopLeft > 0 {
-                    mutablePath.addLineToPoint(CGPoint(x: self.borderWidth / 2, y: topLeftCenter.y))
+                    mutablePath.addLine(to: CGPoint(x: self.borderWidth / 2, y: topLeftCenter.y))
                 } else {
-                    mutablePath.addLineToPoint(topLeftCenter)
+                    mutablePath.addLine(to: topLeftCenter)
                 }
 
                 path = mutablePath
@@ -355,7 +354,7 @@ public class ImageDrawer {
         }
 
         if useCache {
-            self.dynamicType.cachedImages[self.cacheKey] = image
+            type(of: self).cachedImages[self.cacheKey] = image
         }
 
         return image
@@ -367,15 +366,15 @@ public class ImageDrawer {
 
 public extension UIImage {
 
-    public func with(color color: UIColor) -> UIImage {
+    public func with(color: UIColor) -> UIImage {
         return UIImage.with(size: self.size) { context in
-            CGContextTranslateCTM(context, 0, self.size.height)
-            CGContextScaleCTM(context, 1, -1)
-            CGContextSetBlendMode(context, .Normal)
+            context.translateBy(x: 0, y: self.size.height)
+            context.scaleBy(x: 1, y: -1)
+            context.setBlendMode(.normal)
             let rect = CGRect(origin: .zero, size: self.size)
-            CGContextClipToMask(context, rect, self.CGImage)
+            context.clip(to: rect, mask: self.cgImage!)
             color.setFill()
-            CGContextFillRect(context, rect)
+            context.fill(rect)
         }
     }
 

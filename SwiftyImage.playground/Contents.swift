@@ -11,26 +11,26 @@ The most sexy way to use images in Swift.
 //: ----------------------------------
 
 UIImage.size(width: 100, height: 100)
-       .color(UIColor.whiteColor())
-       .border(color: UIColor.redColor())
+       .color(UIColor.white)
+       .border(color: UIColor.red)
        .border(width: 10)
        .corner(radius: 20)
-       .image()
+       .image
 
 UIImage.size(width: 50, height: 50)
-       .color(UIColor.yellowColor())
+       .color(UIColor.yellow)
        .corner(radius: 10)
-       .image()
+       .image
 
 UIImage.size(width: 100, height: 100)
-       .color(UIColor.whiteColor())
-       .border(color: UIColor.blueColor())
+       .color(UIColor.white)
+       .border(color: UIColor.blue)
        .border(width: 10)
-       .border(alignment: .Outside)
+       .border(alignment: .outside)
        .corner(topLeft: 20)
        .corner(topRight: 15)
        .corner(bottomRight: 50)
-       .image()
+       .image
 
 
 //: Resizable image
@@ -40,13 +40,13 @@ UIImage.size(width: 100, height: 100)
     let button = UIButton(frame: CGRect(x: 0, y: 0, width: 100, height: 44))
     button.setBackgroundImage(
         UIImage.resizable()
-               .color(UIColor.whiteColor())
-               .border(color: UIColor.orangeColor())
+               .color(UIColor.white)
+               .border(color: UIColor.orange)
                .border(width: 10)
-               .border(alignment: .Outside)
+               .border(alignment: .outside)
                .corner(radius: 15)
-               .image(),
-        forState: .Normal
+               .image,
+        for: .normal
     )
     return button
 })()
@@ -56,8 +56,8 @@ UIImage.size(width: 100, height: 100)
 //: -------------------------
 
 UIImage.with(size: CGSize(width: 100, height: 100)) { context in
-    UIColor.lightGrayColor().setFill()
-    CGContextFillEllipseInRect(context, CGRect(x: 0, y: 0, width: 100, height: 100))
+    UIColor.lightGray.setFill()
+    context.fillEllipse(in: CGRect(x: 0, y: 0, width: 100, height: 100))
 }
 
 
@@ -66,43 +66,43 @@ UIImage.with(size: CGSize(width: 100, height: 100)) { context in
 
 ({ () -> UIImage in
     let background = UIImage.size(width: 120, height: 120)
-                            .color(UIColor.blackColor())
+                            .color(UIColor.black)
                             .corner(radius: 13.5)
-                            .image()
+                            .image
     let circle = UIImage.size(width: 106, height: 106)
-                        .color(UIColor.whiteColor())
+                        .color(UIColor.white)
                         .corner(radius: 50)
-                        .image()
+                        .image
     let center = UIImage.size(width: 6, height: 6)
-                        .color(UIColor.blackColor())
+                        .color(UIColor.black)
                         .corner(radius: 3)
-                        .image()
+                        .image
     let clock = background + circle + center
     return clock.with { context in
-        CGContextSetLineCap(context, .Round)
+        context.setLineCap(.round)
 
-        UIColor.blackColor().setStroke()
-        CGContextSetLineWidth(context, 2)
+        UIColor.black.setStroke()
+        context.setLineWidth(2)
 
-        CGContextMoveToPoint(context, clock.size.width / 2, clock.size.height / 2)
-        CGContextAddLineToPoint(context, clock.size.width / 2 - 5, 15)
+        context.move(to: CGPoint(x: clock.size.width / 2, y: clock.size.height / 2))
+        context.addLine(to: CGPoint(x: clock.size.width / 2 - 5, y: 15))
 
-        CGContextMoveToPoint(context, clock.size.width / 2, clock.size.height / 2)
-        CGContextAddLineToPoint(context, clock.size.width - 25, clock.size.height / 2 - 3)
+        context.move(to: CGPoint(x: clock.size.width / 2, y: clock.size.height / 2))
+        context.addLine(to: CGPoint(x: clock.size.width - 25, y: clock.size.height / 2 - 3))
 
-        CGContextStrokePath(context)
+        context.strokePath()
 
-        UIColor.redColor().setStroke()
-        CGContextSetLineWidth(context, 1)
+        UIColor.red.setStroke()
+        context.setLineWidth(1)
 
-        CGContextMoveToPoint(context, clock.size.width / 2 + 8, clock.size.height / 2 - 7)
-        CGContextAddLineToPoint(context, 26, clock.size.height / 2 + 32)
+        context.move(to: CGPoint(x: clock.size.width / 2 + 8, y: clock.size.height / 2 - 7))
+        context.addLine(to: CGPoint(x: 26, y: clock.size.height / 2 + 32))
 
-        CGContextStrokePath(context)
+        context.strokePath()
 
-        UIColor.redColor().setFill()
+        UIColor.red.setFill()
         let rect = CGRect(x: clock.size.width / 2 - 1, y: clock.size.height / 2 - 1, width: 2, height: 2)
-        CGContextFillEllipseInRect(context, rect)
+        context.fillEllipse(in: rect)
     }
 })()
 
@@ -112,13 +112,13 @@ UIImage.with(size: CGSize(width: 100, height: 100)) { context in
 
 ({ () -> UIImage in
     let background = UIImage.size(width: 120, height: 120)
-                            .color(UIColor.blackColor())
+                            .color(UIColor.black)
                             .corner(radius: 13.5)
-                            .image()
+                            .image
     let circle = UIImage.size(width: 106, height: 106)
-                        .color(UIColor.whiteColor())
+                        .color(UIColor.white)
                         .corner(radius: 50)
-                        .image()
+                        .image
     return background + circle
 })()
 
@@ -128,13 +128,13 @@ UIImage.with(size: CGSize(width: 100, height: 100)) { context in
 
 ({ () -> UIImage in
     let image = UIImage.size(width: 100, height: 100)
-                       .color(UIColor.whiteColor())
-                       .border(color: UIColor.blueColor())
+                       .color(UIColor.white)
+                       .border(color: UIColor.blue)
                        .border(width: 10)
-                       .border(alignment: .Outside)
+                       .border(alignment: .outside)
                        .corner(topLeft: 20)
                        .corner(topRight: 15)
                        .corner(bottomRight: 50)
-                       .image()
-    return image.with(color: .redColor())
+                       .image
+    return image.with(color: .red)
 })()
