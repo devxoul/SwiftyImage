@@ -1,7 +1,7 @@
 SwiftyImage
 ===========
 
-![Swift 2.0](https://img.shields.io/badge/Swift-3.0-orange.svg)
+![Swift](https://img.shields.io/badge/Swift-3.0-orange.svg)
 [![CocoaPods](http://img.shields.io/cocoapods/v/SwiftyImage.svg?style=flat)](https://cocoapods.org/pods/SwiftyImage)
 
 The most sexy way to use images in Swift.
@@ -14,7 +14,7 @@ Features
 * [x] [Create and manipulate images with CGContext](#play-with-cgcontext)
 * [x] [Combine images with `+` operator](#image-operator)
 * [x] iOS support
-* [ ] OS X support
+* [ ] macOS support
 
 
 At a Glance
@@ -175,14 +175,14 @@ Installation
 - **For iOS 8+ projects:** Use [CocoaPods](https://cocoapods.org) with Podfile:
 
     ```ruby
-    pod 'SwiftyImage', '~> 0.5'
+    pod 'SwiftyImage', '~> 1.0'
     ```
 
 
 - **For iOS 7 projects:** I recommend you to try [CocoaSeeds](https://github.com/devxoul/CocoaSeeds), which uses source code instead of dynamic frameworks. Sample Seedfile:
 
     ```ruby
-    github 'devxoul/SwiftyImage', '0.5.0', :files => 'SwiftyImage/SwiftyImage.swift'
+    github 'devxoul/SwiftyImage', '1.0.0', :files => 'Sources/SwiftyImage.swift'
     ```
 
 
