@@ -1,7 +1,7 @@
 SwiftyImage
 ===========
 
-![Swift 2.0](https://img.shields.io/badge/Swift-2.0-orange.svg)
+![Swift 2.0](https://img.shields.io/badge/Swift-3.0-orange.svg)
 [![CocoaPods](http://img.shields.io/cocoapods/v/SwiftyImage.svg?style=flat)](https://cocoapods.org/pods/SwiftyImage)
 
 The most sexy way to use images in Swift.
@@ -24,11 +24,11 @@ At a Glance
 
 ```swift
 UIImage.size(width: 100, height: 100)
-       .color(UIColor.whiteColor())
-       .border(color: UIColor.redColor())
-       .border(width: 10)
-       .corner(radius: 20)
-       .image()
+  .color(UIColor.whiteColor())
+  .border(color: UIColor.redColor())
+  .border(width: 10)
+  .corner(radius: 20)
+  .image
 ```
 
 ![sample1](https://cloud.githubusercontent.com/assets/931655/8675848/106e59ea-2a81-11e5-8e4f-98cfea38bd8e.png)
@@ -36,11 +36,11 @@ UIImage.size(width: 100, height: 100)
 
 ```swift
 UIImage.resizable()
-       .color(UIColor.whiteColor())
-       .border(color: UIColor.blueColor())
-       .border(width: 5)
-       .corner(radius: 10)
-       .image()
+  .color(UIColor.whiteColor())
+  .border(color: UIColor.blueColor())
+  .border(width: 5)
+  .corner(radius: 10)
+  .image
 ```
 
 ![sample2](https://cloud.githubusercontent.com/assets/931655/8675936/514b7f60-2a81-11e5-8806-26036d8e8ba5.png)
@@ -74,33 +74,33 @@ UIImage.resizable() // ...
 You can set fill color, border attributes, corner radius, etc.
 
 ```swift
-UIImage.size(width: 100, height: 100)     // fixed size
-       .color(UIColor.whiteColor())       // fill color
-       .border(color: UIColor.redColor()) // border color
-       .border(width: 10)                 // border width
-       .corner(radius: 20)                // corner radius
+UIImage.size(width: 100, height: 100)  // fixed size
+  .color(UIColor.whiteColor())         // fill color
+  .border(color: UIColor.redColor())   // border color
+  .border(width: 10)                   // border width
+  .corner(radius: 20)                  // corner radius
 ```
 
 ```swift
 UIImage.resizable() // resizable image
-       .color(UIColor.whiteColor())
-       .border(color: UIColor.lightGrayColor())
-       .border(width: 1)
-       .corner(radius: 5)
+  .color(UIColor.whiteColor())
+  .border(color: UIColor.lightGrayColor())
+  .border(width: 1)
+  .corner(radius: 5)
 ```
 
 
 #### Step 3. Generating Image
 
-Use `.image()` at the end of method chaining to generate image.
+Use `.image` at the end of method chaining to generate image.
 
 ```swift
 imageView.image = UIImage.size(width: 100, height: 100)
-                         .color(UIColor.whiteColor())
-                         .border(color: UIColor.redColor())
-                         .border(width: 10)
-                         .corner(radius: 20)
-                         .image()  // generate UIImage
+  .color(UIColor.whiteColor())
+  .border(color: UIColor.redColor())
+  .border(width: 10)
+  .corner(radius: 20)
+  .image  // generate UIImage
 ```
 
 
@@ -127,7 +127,7 @@ imageView.image = UIImage.size(width: 100, height: 100)
 
 | Generating Image Method | Description |
 |---|---|
-| `.image()` | Generate and return image |
+| `.image` | Generate and return image |
 
 
 Play with CGContext
@@ -139,8 +139,8 @@ SwiftyImage also provides a simple method to create or manipulate images with CG
 
 ```swift
 let image = UIImage.with(size: CGSize(width: 100, height: 100)) { context in
-    UIColor.lightGrayColor().setFill()
-    CGContextFillEllipseInRect(context, CGRect(x: 0, y: 0, width: 100, height: 100))
+  UIColor.lightGrayColor().setFill()
+  CGContextFillEllipseInRect(context, CGRect(x: 0, y: 0, width: 100, height: 100))
 }
 ```
 
@@ -149,8 +149,8 @@ let image = UIImage.with(size: CGSize(width: 100, height: 100)) { context in
 
 ```swift
 let newImage = oldImage.with { context in
-    UIColor.lightGrayColor().setFill()
-    CGContextFillEllipseInRect(context, CGRect(x: 0, y: 0, width: 100, height: 100))
+  UIColor.lightGrayColor().setFill()
+  CGContextFillEllipseInRect(context, CGRect(x: 0, y: 0, width: 100, height: 100))
 }
 ```
 
