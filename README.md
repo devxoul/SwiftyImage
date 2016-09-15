@@ -24,8 +24,8 @@ At a Glance
 
 ```swift
 UIImage.size(width: 100, height: 100)
-  .color(UIColor.whiteColor())
-  .border(color: UIColor.redColor())
+  .color(.white)
+  .border(color: .red)
   .border(width: 10)
   .corner(radius: 20)
   .image
@@ -36,8 +36,8 @@ UIImage.size(width: 100, height: 100)
 
 ```swift
 UIImage.resizable()
-  .color(UIColor.whiteColor())
-  .border(color: UIColor.blueColor())
+  .color(.white)
+  .border(color: .blue)
   .border(width: 5)
   .corner(radius: 10)
   .image
@@ -75,16 +75,16 @@ You can set fill color, border attributes, corner radius, etc.
 
 ```swift
 UIImage.size(width: 100, height: 100)  // fixed size
-  .color(UIColor.whiteColor())         // fill color
-  .border(color: UIColor.redColor())   // border color
+  .color(.white)                       // fill color
+  .border(color: .red))                // border color
   .border(width: 10)                   // border width
   .corner(radius: 20)                  // corner radius
 ```
 
 ```swift
 UIImage.resizable() // resizable image
-  .color(UIColor.whiteColor())
-  .border(color: UIColor.lightGrayColor())
+  .color(.white)
+  .border(color: .lightGray)
   .border(width: 1)
   .corner(radius: 5)
 ```
@@ -96,8 +96,8 @@ Use `.image` at the end of method chaining to generate image.
 
 ```swift
 imageView.image = UIImage.size(width: 100, height: 100)
-  .color(UIColor.whiteColor())
-  .border(color: UIColor.redColor())
+  .color(.white)
+  .border(color: .red)
   .border(width: 10)
   .corner(radius: 20)
   .image  // generate UIImage
@@ -117,7 +117,7 @@ imageView.image = UIImage.size(width: 100, height: 100)
 | `.color(UIColor)` | Set fill color |
 | `.border(width: CGFloat)` | Set border width |
 | `.border(color: UIColor)` | Set border color |
-| `.border(alignment: BorderAlignment)` | Set border alignment. Same with Photoshop's.<br> `.Inside`, `.Center`, `.Outside` |
+| `.border(alignment: BorderAlignment)` | Set border alignment. Same with Photoshop's.<br> `.inside`, `.center`, `.outside` |
 | `.corner(radius: CGFloat)` | Set all corners radius of image |
 | `.corner(topLeft: CGFloat)` | Set top left corner radius of image |
 | `.corner(topRight: CGFloat)` | Set top right corner radius of image |
