@@ -93,14 +93,27 @@ open class ImageDrawer {
     case resizable
   }
 
-  fileprivate var color = UIColor.clear
-  fileprivate var borderColor = UIColor.black
+  fileprivate static let defaultGradientLocations: [CGFloat] = [0, 1]
+  fileprivate static let defaultGradientFrom: CGPoint = .zero
+  fileprivate static let defaultGradientTo: CGPoint = CGPoint(x: 0, y: 1)
+
+  fileprivate var colors: [UIColor] = [.clear]
+  fileprivate var colorLocations: [CGFloat] = defaultGradientLocations
+  fileprivate var colorStartPoint: CGPoint = defaultGradientFrom
+  fileprivate var colorEndPoint: CGPoint = defaultGradientTo
+
+  fileprivate var borderColors: [UIColor] = [.black]
+  fileprivate var borderColorLocations: [CGFloat] = defaultGradientLocations
+  fileprivate var borderColorStartPoint: CGPoint = defaultGradientFrom
+  fileprivate var borderColorEndPoint: CGPoint = defaultGradientTo
   fileprivate var borderWidth: CGFloat = 0
   fileprivate var borderAlignment: BorderAlignment = .inside
+
   fileprivate var cornerRadiusTopLeft: CGFloat = 0
   fileprivate var cornerRadiusTopRight: CGFloat = 0
   fileprivate var cornerRadiusBottomLeft: CGFloat = 0
   fileprivate var cornerRadiusBottomRight: CGFloat = 0
+
   fileprivate var size: Size = .resizable
 
 
@@ -109,10 +122,18 @@ open class ImageDrawer {
   private static var cachedImages = [String: UIImage]()
   private var cacheKey: String {
     var attributes = [String: String]()
-    attributes["color"] = String(self.color.hashValue)
-    attributes["borderColor"] = String(self.borderColor.hashValue)
+    attributes["colors"] = String(self.colors.description.hashValue)
+    attributes["colorLocations"] = String(self.colorLocations.description.hashValue)
+    attributes["colorStartPoint"] = String(String(describing: self.colorStartPoint).hashValue)
+    attributes["colorEndPoint"] = String(String(describing: self.colorEndPoint).hashValue)
+
+    attributes["borderColors"] = String(self.borderColors.description.hashValue)
+    attributes["borderColorLocations"] = String(self.borderColorLocations.description.hashValue)
+    attributes["borderColorStartPoint"] = String(String(describing: self.borderColorStartPoint).hashValue)
+    attributes["borderColorEndPoint"] = String(String(describing: self.borderColorEndPoint).hashValue)
     attributes["borderWidth"] = String(self.borderWidth.hashValue)
     attributes["borderAlignment"] = String(self.borderAlignment.hashValue)
+
     attributes["cornerRadiusTopLeft"] = String(self.cornerRadiusTopLeft.hashValue)
     attributes["cornerRadiusTopRight"] = String(self.cornerRadiusTopRight.hashValue)
     attributes["cornerRadiusBottomLeft"] = String(self.cornerRadiusBottomLeft.hashValue)
@@ -140,7 +161,20 @@ open class ImageDrawer {
   // MARK: Fill
 
   open func color(_ color: UIColor) -> Self {
-    self.color = color
+    self.colors = [color]
+    return self
+  }
+
+  open func color(
+    gradient: [UIColor],
+    locations: [CGFloat] = defaultGradientLocations,
+    from startPoint: CGPoint = defaultGradientFrom,
+    to endPoint: CGPoint = defaultGradientTo
+  ) -> Self {
+    self.colors = gradient
+    self.colorLocations = locations
+    self.colorStartPoint = startPoint
+    self.colorEndPoint = endPoint
     return self
   }
 
@@ -148,7 +182,20 @@ open class ImageDrawer {
   // MARK: Border
 
   open func border(color: UIColor) -> Self {
-    self.borderColor = color
+    self.borderColors = [color]
+    return self
+  }
+
+  open func border(
+    gradient: [UIColor],
+    locations: [CGFloat] = defaultGradientLocations,
+    from startPoint: CGPoint = defaultGradientFrom,
+    to endPoint: CGPoint = defaultGradientTo
+  ) -> Self {
+    self.borderColors = gradient
+    self.borderColorLocations = locations
+    self.borderColorStartPoint = startPoint
+    self.borderColorEndPoint = endPoint
     return self
   }
 
@@ -255,9 +302,6 @@ open class ImageDrawer {
     )
 
     let image = UIImage.with(size: imageSize) { context in
-      self.color.setFill()
-      self.borderColor.setStroke()
-
       let path: UIBezierPath
 
       if self.cornerRadiusTopLeft == self.cornerRadiusTopRight &&
@@ -349,9 +393,57 @@ open class ImageDrawer {
       } else {
         path = UIBezierPath(rect: rect)
       }
-      path.lineWidth = self.borderWidth
-      path.fill()
-      path.stroke()
+
+      // fill
+      context.saveGState()
+      if self.colors.count <= 1 {
+        self.colors.first?.setFill()
+        path.fill()
+      } else {
+        let colorSpace = CGColorSpaceCreateDeviceRGB()
+        let colors = self.colors.map { $0.cgColor } as CFArray
+        if let gradient = CGGradient(colorsSpace: colorSpace, colors: colors, locations: self.colorLocations) {
+          let startPoint = CGPoint(
+            x: self.colorStartPoint.x * imageSize.width,
+            y: self.colorStartPoint.y * imageSize.height
+          )
+          let endPoint = CGPoint(
+            x: self.colorEndPoint.x * imageSize.width,
+            y: self.colorEndPoint.y * imageSize.height
+          )
+          context.addPath(path.cgPath)
+          context.clip()
+          context.drawLinearGradient(gradient, start: startPoint, end: endPoint, options: [])
+        }
+      }
+      context.restoreGState()
+
+      // stroke
+      context.saveGState()
+      if self.borderColors.count <= 1 {
+        self.borderColors.first?.setStroke()
+        path.lineWidth = self.borderWidth
+        path.stroke()
+      } else {
+        let colorSpace = CGColorSpaceCreateDeviceRGB()
+        let colors = self.borderColors.map { $0.cgColor } as CFArray
+        if let gradient = CGGradient(colorsSpace: colorSpace, colors: colors, locations: self.borderColorLocations) {
+          let startPoint = CGPoint(
+            x: self.borderColorStartPoint.x * imageSize.width,
+            y: self.borderColorStartPoint.y * imageSize.height
+          )
+          let endPoint = CGPoint(
+            x: self.borderColorEndPoint.x * imageSize.width,
+            y: self.borderColorEndPoint.y * imageSize.height
+          )
+          context.addPath(path.cgPath)
+          context.setLineWidth(self.borderWidth)
+          context.replacePathWithStrokedPath()
+          context.clip()
+          context.drawLinearGradient(gradient, start: startPoint, end: endPoint, options: [])
+        }
+      }
+      context.restoreGState()
     }
 
     if useCache {
