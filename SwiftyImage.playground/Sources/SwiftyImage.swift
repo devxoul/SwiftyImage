@@ -1,1 +1,0 @@
-../../SwiftyImage/SwiftyImage.swift

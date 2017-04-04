@@ -1,4 +1,5 @@
 import UIKit
+import SwiftyImage
 
 /*:
  SwiftyImage
@@ -18,13 +19,23 @@ UIImage.size(width: 100, height: 100)
   .image
 
 UIImage.size(width: 50, height: 50)
-  .color(UIColor.yellow)
+  .color(.yellow)
   .corner(radius: 10)
   .image
 
 UIImage.size(width: 100, height: 100)
   .color(UIColor.white)
   .border(color: UIColor.blue)
+  .border(width: 10)
+  .border(alignment: .outside)
+  .corner(topLeft: 20)
+  .corner(topRight: 15)
+  .corner(bottomRight: 50)
+  .image
+
+UIImage.size(width: 100, height: 100)
+  .color(gradient: [UIColor.green, UIColor.blue], locations: [0, 1], from: CGPoint(x: 1, y: 0), to: CGPoint(x: 1, y: 1))
+  .border(gradient: [UIColor.red, UIColor.yellow], locations: [0, 1], from: CGPoint(x: 0, y: 0), to: CGPoint(x: 1, y: 0))
   .border(width: 10)
   .border(alignment: .outside)
   .corner(topLeft: 20)
