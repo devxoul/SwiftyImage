@@ -310,7 +310,7 @@ open class ImageDrawer {
          self.cornerRadiusTopLeft > 0 {
         path = UIBezierPath(roundedRect: rect, cornerRadius: self.cornerRadiusTopLeft)
       } else if cornerRadius > 0 {
-        let startAngle = CGFloat(M_PI)
+        let startAngle = CGFloat.pi
 
         let topLeftCenter = CGPoint(
           x: self.cornerRadiusTopLeft + self.borderWidth / 2,
