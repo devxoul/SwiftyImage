@@ -11,6 +11,7 @@ Features
 --------
 
 * [x] [Create images with method chaining](#getting-started)
+* [x] [Gradient fill and stroke](#methods-available)
 * [x] [Create and manipulate images with CGContext](#play-with-cgcontext)
 * [x] [Combine images with `+` operator](#image-operator)
 * [x] iOS support
@@ -76,7 +77,7 @@ You can set fill color, border attributes, corner radius, etc.
 ```swift
 UIImage.size(width: 100, height: 100)  // fixed size
   .color(.white)                       // fill color
-  .border(color: .red))                // border color
+  .border(color: .red)                 // border color
   .border(width: 10)                   // border width
   .corner(radius: 20)                  // corner radius
 ```
@@ -106,28 +107,77 @@ imageView.image = UIImage.size(width: 100, height: 100)
 
 ### Methods Available
 
-| Start Chaining Method | Description |
-|---|---|
-| `.size(width: CGFloat, height: CGFloat)` | Start chaining for fixed size image |
-| `.size(CGSize)` | Start chaining for fixed size image |
-| `.resizable()` | Start chaining for resizable image |
+#### Starting Method Chaining
 
-| Setting Property Method | Description |
-|---|---|
-| `.color(UIColor)` | Set fill color |
-| `.border(width: CGFloat)` | Set border width |
-| `.border(color: UIColor)` | Set border color |
-| `.border(alignment: BorderAlignment)` | Set border alignment. Same with Photoshop's.<br> `.inside`, `.center`, `.outside` |
-| `.corner(radius: CGFloat)` | Set all corners radius of image |
-| `.corner(topLeft: CGFloat)` | Set top left corner radius of image |
-| `.corner(topRight: CGFloat)` | Set top right corner radius of image |
-| `.corner(bottomLeft: CGFloat)` | Set bottom left corner radius of image |
-| `.corner(bottomRight: CGFloat)` | Set bottom right corner radius of image |
+* **`.size(width: CGFloat, height: CGFloat)`**
 
+    Starts chaining for fixed size image
 
-| Generating Image Method | Description |
-|---|---|
-| `.image` | Generate and return image |
+* **`.size(CGSize)`**
+
+    Starts chaining for fixed size image
+
+* **`.resizable()`**
+
+    Starts chaining for resizable image
+
+#### Setting Properties
+
+* **`.color(UIColor)`**
+
+    Sets fill color
+
+* **`.color(gradient: [UIColor], locations: [CGFloat], from: CGPoint, to: CGPoint)`**
+
+    Sets gradient fill color
+
+    *New in version 1.1.0*
+
+* **`.border(width: CGFloat)`**
+
+    Sets border width
+
+* **`.border(color: UIColor)`**
+
+    Sets border color
+
+* **`.border(gradient: [UIColor], locations: [CGFloat], from: CGPoint, to: CGPoint)`**
+
+    Sets gradient border color
+
+    *New in version 1.1.0*
+
+* **`.border(alignment: BorderAlignment)`**
+
+    Sets border alignment. Same with Photoshop's
+    
+    available values: `.inside`, `.center`, `.outside`
+
+* **`.corner(radius: CGFloat)`**
+
+    Sets all corners radius of image
+
+* **`.corner(topLeft: CGFloat)`**
+
+    Sets top left corner radius of image
+
+* **`.corner(topRight: CGFloat)`**
+
+    Sets top right corner radius of image
+
+* **`.corner(bottomLeft: CGFloat)`**
+
+    Sets bottom left corner radius of image
+
+* **`.corner(bottomRight: CGFloat)`**
+
+    Sets bottom right corner radius of image
+
+#### Generating Image
+
+* **`.image`**
+
+    Generates and returns image
 
 
 Play with CGContext
