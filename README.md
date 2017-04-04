@@ -222,19 +222,9 @@ let combinedImage = backgroundImage + iconImage
 Installation
 ------------
 
-- **For iOS 8+ projects:** Use [CocoaPods](https://cocoapods.org) with Podfile:
-
-    ```ruby
-    pod 'SwiftyImage', '~> 1.0'
-    ```
-
-
-- **For iOS 7 projects:** I recommend you to try [CocoaSeeds](https://github.com/devxoul/CocoaSeeds), which uses source code instead of dynamic frameworks. Sample Seedfile:
-
-    ```ruby
-    github 'devxoul/SwiftyImage', '1.0.0', :files => 'Sources/SwiftyImage.swift'
-    ```
-
+```ruby
+pod 'SwiftyImage', '~> 1.1'
+```
 
 Playground
 ----------
