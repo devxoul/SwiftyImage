@@ -87,25 +87,26 @@ public extension UIImage {
 }
 
 open class ImageDrawer {
+  public struct Defaults {
+    public static let gradientLocations: [CGFloat] = [0, 1]
+    public static let gradientFrom: CGPoint = .zero
+    public static let gradientTo: CGPoint = CGPoint(x: 0, y: 1)
+  }
 
   public enum Size {
     case fixed(CGSize)
     case resizable
   }
 
-  fileprivate static let defaultGradientLocations: [CGFloat] = [0, 1]
-  fileprivate static let defaultGradientFrom: CGPoint = .zero
-  fileprivate static let defaultGradientTo: CGPoint = CGPoint(x: 0, y: 1)
-
   fileprivate var colors: [UIColor] = [.clear]
-  fileprivate var colorLocations: [CGFloat] = defaultGradientLocations
-  fileprivate var colorStartPoint: CGPoint = defaultGradientFrom
-  fileprivate var colorEndPoint: CGPoint = defaultGradientTo
+  fileprivate var colorLocations: [CGFloat] = Defaults.gradientLocations
+  fileprivate var colorStartPoint: CGPoint = Defaults.gradientFrom
+  fileprivate var colorEndPoint: CGPoint = Defaults.gradientTo
 
   fileprivate var borderColors: [UIColor] = [.black]
-  fileprivate var borderColorLocations: [CGFloat] = defaultGradientLocations
-  fileprivate var borderColorStartPoint: CGPoint = defaultGradientFrom
-  fileprivate var borderColorEndPoint: CGPoint = defaultGradientTo
+  fileprivate var borderColorLocations: [CGFloat] = Defaults.gradientLocations
+  fileprivate var borderColorStartPoint: CGPoint = Defaults.gradientFrom
+  fileprivate var borderColorEndPoint: CGPoint = Defaults.gradientTo
   fileprivate var borderWidth: CGFloat = 0
   fileprivate var borderAlignment: BorderAlignment = .inside
 
@@ -167,9 +168,9 @@ open class ImageDrawer {
 
   open func color(
     gradient: [UIColor],
-    locations: [CGFloat] = defaultGradientLocations,
-    from startPoint: CGPoint = defaultGradientFrom,
-    to endPoint: CGPoint = defaultGradientTo
+    locations: [CGFloat] = Defaults.gradientLocations,
+    from startPoint: CGPoint = Defaults.gradientFrom,
+    to endPoint: CGPoint = Defaults.gradientTo
   ) -> Self {
     self.colors = gradient
     self.colorLocations = locations
@@ -188,9 +189,9 @@ open class ImageDrawer {
 
   open func border(
     gradient: [UIColor],
-    locations: [CGFloat] = defaultGradientLocations,
-    from startPoint: CGPoint = defaultGradientFrom,
-    to endPoint: CGPoint = defaultGradientTo
+    locations: [CGFloat] = Defaults.gradientLocations,
+    from startPoint: CGPoint = Defaults.gradientFrom,
+    to endPoint: CGPoint = Defaults.gradientTo
   ) -> Self {
     self.borderColors = gradient
     self.borderColorLocations = locations
