@@ -9,9 +9,9 @@
 /* Begin PBXBuildFile section */
 		03011F021D85CF71001AEE18 /* SwiftyImage.h in Headers */ = {isa = PBXBuildFile; fileRef = 03011F001D85CF71001AEE18 /* SwiftyImage.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		03011F031D85CF71001AEE18 /* SwiftyImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03011F011D85CF71001AEE18 /* SwiftyImage.swift */; };
+		0392BCEC1F54B40700AE6B2C /* SwiftyImage.h in Headers */ = {isa = PBXBuildFile; fileRef = 03011F001D85CF71001AEE18 /* SwiftyImage.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		03B1194A1B54E2AB00427302 /* SwiftyImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 03B1193E1B54E2AB00427302 /* SwiftyImage.framework */; };
 		03B119511B54E2AB00427302 /* SwiftyImageTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03B119501B54E2AB00427302 /* SwiftyImageTests.swift */; };
-		17C082281F4E04F9008D310B /* SwiftyImageTVOS.h in Headers */ = {isa = PBXBuildFile; fileRef = 17C082261F4E04F9008D310B /* SwiftyImageTVOS.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		17C0822C1F4E0504008D310B /* SwiftyImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 03011F011D85CF71001AEE18 /* SwiftyImage.swift */; };
 /* End PBXBuildFile section */
 
@@ -28,15 +28,13 @@
 /* Begin PBXFileReference section */
 		03011F001D85CF71001AEE18 /* SwiftyImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SwiftyImage.h; sourceTree = "<group>"; };
 		03011F011D85CF71001AEE18 /* SwiftyImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyImage.swift; sourceTree = "<group>"; };
-		03011F051D85CF75001AEE18 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		03011F071D85CF7F001AEE18 /* SwiftyImage.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = SwiftyImage.playground; sourceTree = "<group>"; };
+		0392BCE81F54B37A00AE6B2C /* Info-iOS.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Info-iOS.plist"; sourceTree = "<group>"; };
+		0392BCE91F54B37A00AE6B2C /* Info-tvOS.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Info-tvOS.plist"; sourceTree = "<group>"; };
 		03B1193E1B54E2AB00427302 /* SwiftyImage.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftyImage.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		03B119491B54E2AB00427302 /* SwiftyImageTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftyImageTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		03B1194F1B54E2AB00427302 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		03B119501B54E2AB00427302 /* SwiftyImageTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftyImageTests.swift; sourceTree = "<group>"; };
 		17C082241F4E04F9008D310B /* SwiftyImage.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftyImage.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		17C082261F4E04F9008D310B /* SwiftyImageTVOS.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SwiftyImageTVOS.h; sourceTree = "<group>"; };
-		17C082271F4E04F9008D310B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,7 +75,8 @@
 		03011F041D85CF75001AEE18 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				03011F051D85CF75001AEE18 /* Info.plist */,
+				0392BCE81F54B37A00AE6B2C /* Info-iOS.plist */,
+				0392BCE91F54B37A00AE6B2C /* Info-tvOS.plist */,
 			);
 			path = "Supporting Files";
 			sourceTree = "<group>";
@@ -89,7 +88,6 @@
 				03011EFF1D85CF71001AEE18 /* Sources */,
 				03B1194D1B54E2AB00427302 /* SwiftyImageTests */,
 				03011F041D85CF75001AEE18 /* Supporting Files */,
-				17C082251F4E04F9008D310B /* SwiftyImageTVOS */,
 				03B1193F1B54E2AB00427302 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -108,26 +106,8 @@
 			isa = PBXGroup;
 			children = (
 				03B119501B54E2AB00427302 /* SwiftyImageTests.swift */,
-				03B1194E1B54E2AB00427302 /* Supporting Files */,
 			);
 			path = SwiftyImageTests;
-			sourceTree = "<group>";
-		};
-		03B1194E1B54E2AB00427302 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				03B1194F1B54E2AB00427302 /* Info.plist */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		17C082251F4E04F9008D310B /* SwiftyImageTVOS */ = {
-			isa = PBXGroup;
-			children = (
-				17C082261F4E04F9008D310B /* SwiftyImageTVOS.h */,
-				17C082271F4E04F9008D310B /* Info.plist */,
-			);
-			path = SwiftyImageTVOS;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -145,7 +125,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				17C082281F4E04F9008D310B /* SwiftyImageTVOS.h in Headers */,
+				0392BCEC1F54B40700AE6B2C /* SwiftyImage.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -188,9 +168,9 @@
 			productReference = 03B119491B54E2AB00427302 /* SwiftyImageTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		17C082231F4E04F9008D310B /* SwiftyImageTVOS */ = {
+		17C082231F4E04F9008D310B /* SwiftyImage-tvOS */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 17C0822B1F4E04F9008D310B /* Build configuration list for PBXNativeTarget "SwiftyImageTVOS" */;
+			buildConfigurationList = 17C0822B1F4E04F9008D310B /* Build configuration list for PBXNativeTarget "SwiftyImage-tvOS" */;
 			buildPhases = (
 				17C0821F1F4E04F9008D310B /* Sources */,
 				17C082201F4E04F9008D310B /* Frameworks */,
@@ -201,7 +181,7 @@
 			);
 			dependencies = (
 			);
-			name = SwiftyImageTVOS;
+			name = "SwiftyImage-tvOS";
 			productName = SwiftyImageTVOS;
 			productReference = 17C082241F4E04F9008D310B /* SwiftyImage.framework */;
 			productType = "com.apple.product-type.framework";
@@ -243,7 +223,7 @@
 			targets = (
 				03B1193D1B54E2AB00427302 /* SwiftyImage */,
 				03B119481B54E2AB00427302 /* SwiftyImageTests */,
-				17C082231F4E04F9008D310B /* SwiftyImageTVOS */,
+				17C082231F4E04F9008D310B /* SwiftyImage-tvOS */,
 			);
 		};
 /* End PBXProject section */
@@ -359,6 +339,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -408,6 +389,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -424,14 +406,13 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "$(SRCROOT)/SwiftyImageTests/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Supporting Files/Info-iOS.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "kr.xoul.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = SwiftyImage;
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -444,13 +425,12 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "$(SRCROOT)/SwiftyImageTests/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/Supporting Files/Info-iOS.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "kr.xoul.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = SwiftyImage;
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
@@ -466,11 +446,10 @@
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = SwiftyImageTests/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Supporting Files/Info-iOS.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "kr.xoul.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -482,11 +461,10 @@
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = SwiftyImageTests/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Supporting Files/Info-iOS.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "kr.xoul.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
@@ -511,17 +489,16 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				GCC_C_LANGUAGE_STANDARD = gnu11;
-				INFOPLIST_FILE = SwiftyImageTVOS/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Supporting Files/Info-tvOS.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = kr.xoul.SwiftyImage.SwiftyImageTVOS;
+				PRODUCT_BUNDLE_IDENTIFIER = "kr.xoul.SwiftyImage.SwiftyImage-tvOS";
 				PRODUCT_NAME = SwiftyImage;
 				SDKROOT = appletvos;
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
-				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 3;
-				TVOS_DEPLOYMENT_TARGET = 11.0;
+				TVOS_DEPLOYMENT_TARGET = 9.0;
 			};
 			name = Debug;
 		};
@@ -545,16 +522,15 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				GCC_C_LANGUAGE_STANDARD = gnu11;
-				INFOPLIST_FILE = SwiftyImageTVOS/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Supporting Files/Info-tvOS.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = kr.xoul.SwiftyImage.SwiftyImageTVOS;
+				PRODUCT_BUNDLE_IDENTIFIER = "kr.xoul.SwiftyImage.SwiftyImage-tvOS";
 				PRODUCT_NAME = SwiftyImage;
 				SDKROOT = appletvos;
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 3;
-				TVOS_DEPLOYMENT_TARGET = 11.0;
+				TVOS_DEPLOYMENT_TARGET = 9.0;
 			};
 			name = Release;
 		};
@@ -588,7 +564,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		17C0822B1F4E04F9008D310B /* Build configuration list for PBXNativeTarget "SwiftyImageTVOS" */ = {
+		17C0822B1F4E04F9008D310B /* Build configuration list for PBXNativeTarget "SwiftyImage-tvOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				17C082291F4E04F9008D310B /* Debug */,

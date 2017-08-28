@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0900"
+   LastUpgradeVersion = "0830"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -15,8 +15,8 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "17C082231F4E04F9008D310B"
-               BuildableName = "SwiftyImageTVOS.framework"
-               BlueprintName = "SwiftyImageTVOS"
+               BuildableName = "SwiftyImage.framework"
+               BlueprintName = "SwiftyImage-tvOS"
                ReferencedContainer = "container:SwiftyImage.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -26,7 +26,6 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      language = ""
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
       </Testables>
@@ -37,7 +36,6 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      language = ""
       launchStyle = "0"
       useCustomWorkingDirectory = "NO"
       ignoresPersistentStateOnLaunch = "NO"
@@ -48,8 +46,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "17C082231F4E04F9008D310B"
-            BuildableName = "SwiftyImageTVOS.framework"
-            BlueprintName = "SwiftyImageTVOS"
+            BuildableName = "SwiftyImage.framework"
+            BlueprintName = "SwiftyImage-tvOS"
             ReferencedContainer = "container:SwiftyImage.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -66,8 +64,8 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "17C082231F4E04F9008D310B"
-            BuildableName = "SwiftyImageTVOS.framework"
-            BlueprintName = "SwiftyImageTVOS"
+            BuildableName = "SwiftyImage.framework"
+            BlueprintName = "SwiftyImage-tvOS"
             ReferencedContainer = "container:SwiftyImage.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
