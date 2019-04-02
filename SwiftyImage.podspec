@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'SwiftyImage'
-  s.version          = '1.3.0'
+  s.version          = '1.4.0'
   s.summary          = 'The most sexy way to use images in Swift.'
   s.homepage         = 'https://github.com/devxoul/SwiftyImage'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
@@ -9,6 +9,7 @@ Pod::Spec.new do |s|
                          :tag => s.version.to_s }
   s.source_files     = 'Sources/SwiftyImage.swift'
   s.requires_arc     = true
+  s.swift_version    = '5.0'
 
   s.ios.deployment_target = '8.0'
   s.tvos.deployment_target = '9.0'
