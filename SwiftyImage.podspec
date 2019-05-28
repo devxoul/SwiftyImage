@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'SwiftyImage'
-  s.version          = '1.4.0'
+  s.version          = '1.5.0'
   s.summary          = 'The most sexy way to use images in Swift.'
   s.homepage         = 'https://github.com/devxoul/SwiftyImage'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
