@@ -262,7 +262,7 @@ open class ImageDrawer {
 
       let image = self.imageWithSize(CGSize(width: imageSize, height: imageSize))
       let capInsets = UIEdgeInsets(top: capSize, left: capSize, bottom: capSize, right: capSize)
-      return image.resizableImage(withCapInsets: capInsets)
+      return image.resizableImage(withCapInsets: capInsets, resizingMode: .stretch)
     }
   }
 
