@@ -269,7 +269,9 @@ open class ImageDrawer {
 
   private func imageWithSize(_ size: CGSize, useCache: Bool = true) -> UIImage {
     if useCache {
-      if let cachedImage = type(of: self).cachedImages[self.cacheKey] {
+      ImageDrawer.lock.lock()
+      defer { ImageDrawer.lock.unlock() }
+      if let cachedImage = ImageDrawer.cachedImages[self.cacheKey] {
         return cachedImage
       }
     }
