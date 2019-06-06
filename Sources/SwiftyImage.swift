@@ -121,42 +121,30 @@ open class ImageDrawer {
   // MARK: Cache
 
   private static let lock: NSLock = NSLock()
-  private static var cachedImages = [String: UIImage]()
-  private var cacheKey: String {
-    var attributes = [String: String]()
-    attributes["colors"] = String(self.colors.description.hashValue)
-    attributes["colorLocations"] = String(self.colorLocations.description.hashValue)
-    attributes["colorStartPoint"] = String(String(describing: self.colorStartPoint).hashValue)
-    attributes["colorEndPoint"] = String(String(describing: self.colorEndPoint).hashValue)
+  private static var cachedImages = [AnyHashable: UIImage]()
+  private var cacheKey: AnyHashable {
+    var hasher = Hasher()
 
-    attributes["borderColors"] = String(self.borderColors.description.hashValue)
-    attributes["borderColorLocations"] = String(self.borderColorLocations.description.hashValue)
-    attributes["borderColorStartPoint"] = String(String(describing: self.borderColorStartPoint).hashValue)
-    attributes["borderColorEndPoint"] = String(String(describing: self.borderColorEndPoint).hashValue)
-    attributes["borderWidth"] = String(self.borderWidth.hashValue)
-    attributes["borderAlignment"] = String(self.borderAlignment.hashValue)
+    hasher.combine(self.colors)
+    hasher.combine(self.colorLocations)
+    hasher.combine(String(describing: self.colorStartPoint))
+    hasher.combine(String(describing: self.colorEndPoint))
 
-    attributes["cornerRadiusTopLeft"] = String(self.cornerRadiusTopLeft.hashValue)
-    attributes["cornerRadiusTopRight"] = String(self.cornerRadiusTopRight.hashValue)
-    attributes["cornerRadiusBottomLeft"] = String(self.cornerRadiusBottomLeft.hashValue)
-    attributes["cornerRadiusBottomRight"] = String(self.cornerRadiusBottomRight.hashValue)
+    hasher.combine(self.borderColors)
+    hasher.combine(self.borderColorLocations)
+    hasher.combine(String(describing: self.borderColorStartPoint))
+    hasher.combine(String(describing: self.borderColorEndPoint))
+    hasher.combine(self.borderWidth)
+    hasher.combine(self.borderAlignment)
 
-    switch self.size {
-    case .fixed(let size):
-      attributes["size"] = "Fixed(\(size.width), \(size.height))"
-    case .resizable:
-      attributes["size"] = "Resizable"
-    }
+    hasher.combine(self.cornerRadiusTopLeft)
+    hasher.combine(self.cornerRadiusTopRight)
+    hasher.combine(self.cornerRadiusBottomLeft)
+    hasher.combine(self.cornerRadiusBottomRight)
 
-    var serializedAttributes = [String]()
-    for key in attributes.keys.sorted() {
-      if let value = attributes[key] {
-        serializedAttributes.append("\(key):\(value)")
-      }
-    }
+    hasher.combine(String(describing: self.size))
 
-    let cacheKey = serializedAttributes.joined(separator: "|")
-    return cacheKey
+    return hasher.finalize()
   }
 
 

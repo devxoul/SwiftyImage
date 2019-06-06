@@ -8,9 +8,24 @@
 
 import UIKit
 import XCTest
-import SwiftyImage
+@testable import SwiftyImage
 
 class SwiftyImageTests: XCTestCase {
+  func testCache() {
+    XCTAssertEqual(
+      UIImage.size(width: 10, height: 20).color(.blue).corner(radius: 5).border(width: 12).border(color: .red).image,
+      UIImage.size(width: 10, height: 20).color(.blue).corner(radius: 5).border(width: 12).border(color: .red).image
+    )
+    XCTAssertEqual(
+      UIImage.resizable().color(.blue).corner(radius: 5).border(width: 12).border(color: .red).image,
+      UIImage.resizable().color(.blue).corner(radius: 5).border(width: 12).border(color: .red).image
+    )
+    XCTAssertNotEqual(
+      UIImage.resizable().color(.blue).corner(radius: 5).border(width: 12).border(color: .red).image,
+      UIImage.resizable().color(.red).corner(radius: 5).border(width: 12).border(color: .blue).image
+    )
+  }
+
   func testCacheLock() {
     for _ in 0..<100 {
       DispatchQueue.global().async {
