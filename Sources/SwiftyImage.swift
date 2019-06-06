@@ -120,6 +120,7 @@ open class ImageDrawer {
 
   // MARK: Cache
 
+  private static let lock: NSLock = NSLock()
   private static var cachedImages = [String: UIImage]()
   private var cacheKey: String {
     var attributes = [String: String]()
@@ -267,8 +268,10 @@ open class ImageDrawer {
   }
 
   private func imageWithSize(_ size: CGSize, useCache: Bool = true) -> UIImage {
-    if let cachedImage = type(of: self).cachedImages[self.cacheKey], useCache {
-      return cachedImage
+    if useCache {
+      if let cachedImage = type(of: self).cachedImages[self.cacheKey] {
+        return cachedImage
+      }
     }
 
     var imageSize = CGSize(width: size.width, height: size.height)
@@ -448,7 +451,9 @@ open class ImageDrawer {
     }
 
     if useCache {
-      type(of: self).cachedImages[self.cacheKey] = image
+      ImageDrawer.lock.lock()
+      ImageDrawer.cachedImages[self.cacheKey] = image
+      ImageDrawer.lock.unlock()
     }
 
     return image

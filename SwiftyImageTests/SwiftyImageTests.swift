@@ -8,29 +8,17 @@
 
 import UIKit
 import XCTest
+import SwiftyImage
 
 class SwiftyImageTests: XCTestCase {
-    
-    override func setUp() {
-        super.setUp()
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+  func testCacheLock() {
+    for _ in 0..<100 {
+      DispatchQueue.global().async {
+        _ = UIImage.resizable().border(width: 1).corner(radius: 15).image
+      }
     }
-    
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-        super.tearDown()
-    }
-    
-    func testExample() {
-        // This is an example of a functional test case.
-        XCTAssert(true, "Pass")
-    }
-    
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure() {
-            // Put the code you want to measure the time of here.
-        }
-    }
-    
+
+    let expectation = XCTestExpectation()
+    XCTWaiter().wait(for: [expectation], timeout: 1)
+  }
 }
