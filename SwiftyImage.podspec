@@ -7,7 +7,7 @@ Pod::Spec.new do |s|
   s.author           = { 'Suyeol Jeon' => 'devxoul@gmail.com' }
   s.source           = { :git => 'https://github.com/devxoul/SwiftyImage.git',
                          :tag => s.version.to_s }
-  s.source_files     = 'Sources/SwiftyImage.swift'
+  s.source_files     = 'Sources/SwiftyImage/SwiftyImage.swift'
   s.requires_arc     = true
   s.swift_version    = '5.0'
 
