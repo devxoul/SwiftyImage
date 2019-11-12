@@ -59,7 +59,6 @@ public func + (lhs: UIImage, rhs: UIImage) -> UIImage {
       rhsRect.size = lhsRect.size
     }
 
-    lhs.draw(in: lhsRect)
     rhs.draw(in: rhsRect)
   }
 }
