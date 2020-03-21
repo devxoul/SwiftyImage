@@ -47,5 +47,5 @@ jobs:
       run: |
         bash <(curl -s https://codecov.io/bash) \
           -X xcodeplist \
-          -t d308ef2d-d20b-4423-bd44-b92c082f7683
           -J "$CODECOV_PACKAGE_NAME" \
+          -t ${{ secrets.CODECOV_TOKEN }}
