@@ -6,6 +6,7 @@
 //  Copyright (c) 2015 Suyeol Jeon. All rights reserved.
 //
 
+#if os(iOS) || os(tvOS)
 import UIKit
 import XCTest
 @testable import SwiftyImage
@@ -37,3 +38,4 @@ class SwiftyImageTests: XCTestCase {
     XCTWaiter().wait(for: [expectation], timeout: 1)
   }
 }
+#endif

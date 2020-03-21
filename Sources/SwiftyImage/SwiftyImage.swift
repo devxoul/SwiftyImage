@@ -6,6 +6,7 @@
 //  Copyright (c) 2015 Suyeol Jeon. All rights reserved.
 //
 
+#if os(iOS) || os(tvOS)
 import UIKit
 
 public enum BorderAlignment {
@@ -467,3 +468,4 @@ public extension UIImage {
   }
 
 }
+#endif
