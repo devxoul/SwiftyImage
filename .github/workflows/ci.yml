@@ -7,6 +7,10 @@ on:
 jobs:
   test:
     runs-on: macOS-latest
+    env:
+      PROJECT: SwiftyImage.xcodeproj
+      SCHEME: SwiftyImage-Package
+      CODECOV_PACKAGE_NAME: SwiftyImage
     strategy:
       matrix:
         env:
@@ -36,8 +40,6 @@ jobs:
           -enableCodeCoverage YES \
           CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO | xcpretty -c;
       env:
-        PROJECT: SwiftyImage.xcodeproj
-        SCHEME: SwiftyImage-Package
         SDK: ${{ matrix.env.sdk }}
         DESTINATION: ${{ matrix.env.destination }}
 
@@ -45,5 +47,5 @@ jobs:
       run: |
         bash <(curl -s https://codecov.io/bash) \
           -X xcodeplist \
-          -J SwiftyImage \
           -t d308ef2d-d20b-4423-bd44-b92c082f7683
+          -J "$CODECOV_PACKAGE_NAME" \
