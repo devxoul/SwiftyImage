@@ -125,6 +125,10 @@ open class ImageDrawer {
   private var cacheKey: AnyHashable {
     var hasher = Hasher()
 
+    if #available(iOS 13, tvOS 13.0, *) {
+      hasher.combine(UITraitCollection.current.userInterfaceStyle)
+    }
+
     hasher.combine(self.colors)
     hasher.combine(self.colorLocations)
     hasher.combine(String(describing: self.colorStartPoint))
