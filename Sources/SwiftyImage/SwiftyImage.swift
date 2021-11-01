@@ -28,7 +28,9 @@ public extension UIImage {
 
   class func with(size: CGSize, opaque: Bool = false, scale: CGFloat = 0, block: ContextBlock) -> UIImage {
     UIGraphicsBeginImageContextWithOptions(size, opaque, scale)
-    let context = UIGraphicsGetCurrentContext()!
+    guard let context = UIGraphicsGetCurrentContext() else {
+        return UIImage()
+    }
     block(context)
     let image = UIGraphicsGetImageFromCurrentImageContext()
     UIGraphicsEndImageContext()
