@@ -131,12 +131,12 @@ open class ImageDrawer {
       hasher.combine(UITraitCollection.current.userInterfaceStyle)
     }
 
-    hasher.combine(self.colors)
+    hasher.combine(self.colors.map({ $0.hexString() }))
     hasher.combine(self.colorLocations)
     hasher.combine(String(describing: self.colorStartPoint))
     hasher.combine(String(describing: self.colorEndPoint))
 
-    hasher.combine(self.borderColors)
+    hasher.combine(self.borderColors.map({ $0.hexString() }))
     hasher.combine(self.borderColorLocations)
     hasher.combine(String(describing: self.borderColorStartPoint))
     hasher.combine(String(describing: self.borderColorEndPoint))
@@ -474,4 +474,19 @@ public extension UIImage {
   }
 
 }
+
+extension UIColor {
+    fileprivate func hexString() -> String {
+        let components = self.cgColor.components
+        let r: CGFloat = components?[0] ?? 0.0
+        let g: CGFloat = components?[1] ?? 0.0
+        let b: CGFloat = components?[2] ?? 0.0
+        let a: CGFloat = components?[3] ?? 0.0
+
+        let hexString = String.init(format: "#%02lX%02lX%02lX%02lX", lroundf(Float(a * 255)), lroundf(Float(r * 255)), lroundf(Float(g * 255)), lroundf(Float(b * 255)))
+        print("hexString -- \(hexString)")
+        return hexString
+     }
+}
+
 #endif
